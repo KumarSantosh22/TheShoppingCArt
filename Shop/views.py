@@ -117,3 +117,4 @@ def checkout(request):
 
 def test_page(request):
     return render(request, 'about/careers.html')
+ 
