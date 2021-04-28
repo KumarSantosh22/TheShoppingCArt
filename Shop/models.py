@@ -1,5 +1,5 @@
 from django.db import models
-
+import datetime
 
 class Seller(models.Model):
 
@@ -30,7 +30,7 @@ class Seller(models.Model):
     description = models.TextField(max_length=300)
     gstin = models.CharField(max_length=50)
     password = models.CharField(max_length=20)
-    reg_date = models.DateField(auto_now_add=True)
+    reg_date = models.DateField(blank=True, null=True)
 
     category = models.CharField(max_length=100, choices=CATEGORY_CHOICES)
     subcategory = models.CharField(max_length=100, choices=SUBCATEGORY_CHOICES)
@@ -51,7 +51,7 @@ class Customer(models.Model):
     address = models.TextField(max_length=500)
     password = models.CharField(max_length=20)
     delievery_address = models.TextField(max_length=250)
-    reg_date = models.DateField(auto_now_add=True, editable=False)
+    reg_date = models.DateField(default=datetime.datetime.now, editable=False)
 
     def __str__(self):
         return str(self.customer_id)
@@ -156,7 +156,7 @@ class Product(models.Model):
     subcategory = models.CharField(max_length=100, choices=SUBCATEGORY_CHOICES)
     season = models.CharField(max_length=20, choices=SEASON_CHOICES)
     type = models.CharField(max_length=20, choices=TYPE_CHOICES)
-    exp_date = models.DateField(default=None, null=True)
+    exp_date = models.DateField(blank=True, null=True)
 
     seller_id = models.ForeignKey(Seller, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='product/', blank=True)
@@ -169,9 +169,10 @@ class Order(models.Model):
 
     STATUS_CHOICES = (
         ('NA', '--Not-Available--'),
-        ('1', 'Shipped'),
-        ('2', 'Out For Delivery'),
-        ('3', 'Arrived'),
+        ('1', 'Ordered'),
+        ('2', 'Packed'),
+        ('3', 'Shipped'),
+        ('4', 'Delievered'),
         ('9', 'Cancelled'),
     )
     order_id = models.IntegerField(
@@ -182,13 +183,14 @@ class Order(models.Model):
     status4 = models.CharField(max_length=20, choices=STATUS_CHOICES)
     invoice = models.IntegerField()
     no_of_items = models.IntegerField()
-    order_date = models.DateField(auto_now_add=True)
-    shipping_date = models.DateField(auto_now_add=False)
+    order_date = models.DateField(blank=True, null=True)
+    shipping_date = models.DateField(blank=True, null=True)
     shipping_address = models.TextField(max_length=250)
 
     is_shipped = models.BooleanField(default=False)
     is_cancelled = models.BooleanField(default=False)
     is_delivered = models.BooleanField(default=False)
+    deliever_date  = models.DateField(blank=True, null=True)
 
     productid = models.ForeignKey(Product, on_delete=models.CASCADE)
     customerid = models.ForeignKey(Customer, on_delete=models.CASCADE)
