@@ -18,4 +18,5 @@ urlpatterns = [
 
     # test page urls
     path('test', views.test_page, name='test'),
+    path('privacy',views.privacy,name='privacy'),
 ]
