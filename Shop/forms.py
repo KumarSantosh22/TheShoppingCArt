@@ -17,3 +17,4 @@ class SellerForm(forms.ModelForm):
     class Meta:
         model = Seller
         fields = ['name', 'email', 'phone', 'description', 'address', 'password', 'category', 'subcategory']
+        labels = {'name': 'Name', 'email': 'Email'}
