@@ -18,9 +18,6 @@ urlpatterns = [
 
     # test page urls
     path('test', views.test_page, name='test'),
-<<<<<<< HEAD
     path('privacy',views.privacy,name='privacy'),
-=======
     path("privacy",views.privacy,name="privacy"),
->>>>>>> master
 ]
