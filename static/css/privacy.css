@@ -1,0 +1,15 @@
+
+.privacy{
+    text-align: center;
+    padding-top:40px;
+}
+section{
+    padding:10px;
+    padding-bottom: 40px;
+}
+section {
+    max-width: 960px;
+    margin:1.5em auto;
+section p{
+    line-height: 1.20;
+}
