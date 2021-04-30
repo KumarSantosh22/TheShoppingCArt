@@ -1,8 +1,14 @@
+<<<<<<< HEAD
 
 .privacy{
     padding-top:40px;
     
     text-align: center;
+=======
+h3{
+    text-align: center;
+    padding-top:40px;
+>>>>>>> master
 }
 section{
     padding:10px;
@@ -11,6 +17,7 @@ section{
 section {
     max-width: 960px;
     margin:1.5em auto;
+<<<<<<< HEAD
 }
 section p{
     font-size: 14px;
@@ -19,3 +26,14 @@ section p{
 section h4{
     line-height: 2.5;
 }
+=======
+    padding-bottom: 40px;
+}
+section h4{
+    line-height: 2.56em;
+}
+section p{
+    padding-top:10px;
+    font-size: 14px;
+}
+>>>>>>> master

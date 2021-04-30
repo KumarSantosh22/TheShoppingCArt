@@ -118,9 +118,16 @@ def checkout(request):
 def test_page(request):
     return render(request, 'about/careers.html')
 
+<<<<<<< HEAD
 
     #privacy page return by Anish
 
 def privacy(request):
     return render(request,'policy/privacy.html')
+=======
+#Anish tiwari
+
+def privacy(request):
+    return render(request,"policy/privacy.html")
+>>>>>>> master
  
