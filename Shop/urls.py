@@ -8,15 +8,18 @@ urlpatterns = [
     path('careers', views.careers, name='careers'),
     path('error', views.page_not_found, name='error'),
     # registerion urls
-    path('signupuser', views.signup_user, name='signup_user'),
-    path('signupcustomer', views.signup_customer, name='signup_customer'),
+    path('signup', views.signup, name='signup'),
     path('signupseller', views.signup_seller, name='signup_seller'),
     # login urls
-    path('login', views.login, name='login'),
+    path('Login', views.Login, name='userlogin'),
+    path('Logout', views.Logout, name='Logout'),
+    # profile
+    path('profile', views.profile, name='userprofile'),
+    path('updateprofile', views.updateprofile, name='updateprofile'),
     # cart
     path('checkout', views.checkout, name='checkout'),
 
     # test page urls
-    path('test', views.test_page, name='test'),
+    path('test', views.test, name='test'),
     path("privacy",views.privacy,name="privacy"),
 ]

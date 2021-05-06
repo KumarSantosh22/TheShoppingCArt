@@ -1,0 +1,102 @@
+{%extends 'base.html'%}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/updateprofile.css' %}"> {% endblock %}
+
+{% block title %}Update | Profile{% endblock %}
+<!-- Add your title here -->>
+
+{% block main %}
+
+    <div class="form01">
+        <form action="{% url 'updateprofile' %}" method="POST" class="form02" , enctype="multipart/form-data">
+            {% csrf_token %}
+    
+            <h2 class="h02">Update Profile</h2>
+    
+            <div style="user-select: auto;">
+                <label for="id_image01" style="user-select: auto;">Current Profile Photo :</label>
+                <img src="{{cust.image.url}}" width="150" height="150" id="id_image01" alt="IMG">
+            </div>
+    
+            <!-- {% for field in form %}
+                    <div>
+                        <label for="{{field.id_for_label}}">{{field.label}} :</label>{{field}}
+                        {% for error in field.errors %}
+                        <p style="color: red">{{ error }}</p>
+                    
+                        {% endfor %}
+                    </div>
+                {% endfor %} -->
+    
+            <div style="user-select: auto;">
+                <label for="id_image" style="user-select: auto;">Current Profile Photo :</label><input type="file"
+                    name="image" accept="image/*" id="id_image" style="user-select: auto;">
+    
+            </div>
+    
+            <div style="user-select: auto;">
+                <label for="id_first_name" style="user-select: auto;">First Name :</label><input type="text"
+                    value="{{user.first_name}}" name="first_name" maxlength="50" required="" id="id_first_name"
+                    style="user-select: auto;">
+    
+            </div>
+    
+            <div style="user-select: auto;">
+                <label for="id_last_name" style="user-select: auto;">Last Name :</label><input type="text"
+                    value="{{user.last_name}}" name="last_name" maxlength="50" id="id_last_name"
+                    style="user-select: auto;">
+    
+            </div>
+    
+            <div style="user-select: auto;">
+                <label for="id_email" style="user-select: auto;">Email :</label><input type="email" name="email"
+                    value="{{user.email}}" maxlength="50" required="" id="id_email" style="user-select: auto;">
+    
+            </div>
+    
+            <div style="user-select: auto;">
+                <label for="id_phone" style="user-select: auto;">Phone :</label><input type="text" name="phone"
+                    value="{{cust.phone}}" maxlength="10" required="" id="id_phone" style="user-select: auto;">
+    
+            </div>
+    
+            <div style="user-select: auto;">
+                <label for="id_dob" style="user-select: auto;">DoB :</label><input type="date" name="dob"
+                    required="" id="id_dob" style="user-select: auto;">
+    
+            </div>
+    
+            <div style="user-select: auto;">
+                <label for="id_residential_address" style="user-select: auto;">Residential Address
+                    :</label><textarea name="residential_address" cols="40" rows="5" maxlength="250" required=""
+                    id="id_residential_address" class="txt"
+                    style="user-select: auto;">{{cust.residential_address}}</textarea>
+    
+            </div>
+    
+            <div style="user-select: auto;">
+                <label for="id_permanent_address" style="user-select: auto;">Permanent Address :</label><textarea
+                    name="permanent_address" cols="40" rows="5" maxlength="250" required=""
+                    id="id_permanent_address" class="txt"
+                    style="user-select: auto;">{{cust.permanent_address}}</textarea>
+    
+            </div>
+    
+            <div style="user-select: auto;">
+                <label for="id_delievery_address" style="user-select: auto;">Delievery Address :</label><textarea
+                    name="delievery_address" cols="40" rows="5" maxlength="250" required=""
+                    id="id_delievery_address" class="txt"
+                    style="user-select: auto;">{{cust.delievery_address}}</textarea>
+    
+            </div>
+    
+            <button class="btn01" type="submit" style="user-select: auto;">Update</button>
+    
+        </form>
+    
+    </div>
+
+
+    {% endblock %}

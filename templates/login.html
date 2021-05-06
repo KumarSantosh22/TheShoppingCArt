@@ -1,7 +1,7 @@
 {%extends 'base.html'%}
 {% load static %}
 
-{% block css %}<link rel="stylesheet" href="{% static 'css/index.css' %}"> {% endblock %}
+{% block css %}<link rel="stylesheet" href="{% static 'css/login.css' %}"> {% endblock %}
 <!-- Add your css link here  -->
 
 {% block title %}Login{% endblock %}
@@ -9,10 +9,27 @@
 
 {% block main %}
 
-<!-- Start Writing from here -->
+    <div class="login01">
+    
+        <form method="POST" action="Login" class="form02">
+            {% csrf_token %}
+            <h2 class="h02">Registered User Login here : </h2>
+    
+            {% for field in form %}
+            <div>
+                <label for="{{field.id_for_label}}">{{field.name.label}}</label>
+                {{field.name}} : {{field}}
+    
+                {% for error in field.errors %}
+                <p style="color: red">{{ error }}</p>
+    
+                {% endfor %}
+            </div>
+            {% endfor %}
+            <button class="btn01" type="submit">Login</button>
+            <div class="div01">
+                <p>New User<a class="tag001" href="{% url 'signup' %}"> Register here</a> </p>
+            </div>
+        </form>
 
 {% endblock %}
-
-{% block js %}
-<!-- Add your inline javascript here  -->
-{% endblock%}

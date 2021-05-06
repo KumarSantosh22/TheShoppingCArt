@@ -1,0 +1,60 @@
+.signup01{
+    margin: 1rem;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form02{
+  border: 2px solid rgb(74, 1, 211);
+  margin: 2rem;
+  border-radius: .3rem;
+}
+.form02 label{
+  margin: 2rem;
+}
+.form02 input{
+  margin: .1rem;
+  padding: 0.1rem;
+  font-size: 1em;
+  font-weight: bold;
+
+}
+
+
+.btn01{
+  margin: 1rem;
+  padding: .4rem;
+  color: #fff;
+  background-color: rgba(0, 0, 255);
+  outline: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+.btn01:hover{
+  background-color: rgba(0, 0, 255, .9);
+
+}
+
+.h02{
+  margin: 1rem;
+  color: rgb(74, 1, 211);
+}
+
+#instr{
+  margin: 1rem 2rem;
+  padding: 1rem;
+}
+
+.div001{
+    margin: .1rem .5rem;
+    padding: .1rem .5rem;
+}
+
+.tag001{
+    color: blue;
+}
+.tag001:hover{
+    color: red;
+}

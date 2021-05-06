@@ -1,0 +1,32 @@
+/* CSS for FORM */
+.customer-form{
+    margin: 1rem;
+    padding: 1rem;
+    display: flex;
+    background: rgb(184, 230, 238);
+}
+.customer-form form{
+    margin: 1rem;
+    padding: 1rem;
+}
+.customer-form form{
+    margin: 1rem;
+    padding: 1rem;
+}
+.customer-form input{
+    margin: .1rem;
+    padding: .1rem;
+}
+
+/* SignIn Button */
+
+.signin-button{
+    margin: .3rem;
+    padding: .3rem;
+    color: #eee;
+    background: blue;
+    border: none;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: .3em;
+}

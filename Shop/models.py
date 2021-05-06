@@ -1,5 +1,6 @@
 from django.db import models
 import datetime
+from django.contrib.auth.models import User
 
 class Seller(models.Model):
 
@@ -24,17 +25,13 @@ class Seller(models.Model):
 
     seller_id = models.IntegerField(
         primary_key=True, blank=False, auto_created=True)
-    name = models.CharField(max_length=50)
-    email = models.EmailField(max_length=50)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     phone = models.CharField(max_length=12)
     description = models.TextField(max_length=300)
     gstin = models.CharField(max_length=50)
-    password = models.CharField(max_length=20)
-    reg_date = models.DateField(blank=True, null=True)
-
     category = models.CharField(max_length=100, choices=CATEGORY_CHOICES)
     subcategory = models.CharField(max_length=100, choices=SUBCATEGORY_CHOICES)
-    address = models.TextField(max_length=250)
+    residential_address = models.TextField(max_length=250)
     permanent_address = models.TextField(max_length=250)
     shop_address = models.TextField(max_length=250)
 
@@ -45,16 +42,15 @@ class Seller(models.Model):
 class Customer(models.Model):
     customer_id = models.IntegerField(
         primary_key=True, blank=False, auto_created=True)
-    name = models.CharField(max_length=50)
-    email = models.EmailField(max_length=50)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='profile/', default='profile/def_user.png', blank=True)
     phone = models.CharField(max_length=10)
-    address = models.TextField(max_length=500)
-    password = models.CharField(max_length=20)
+    residential_address = models.TextField(max_length=250)
+    permanent_address = models.TextField(max_length=250)
     delievery_address = models.TextField(max_length=250)
-    reg_date = models.DateField(default=datetime.datetime.now, editable=False)
 
     def __str__(self):
-        return str(self.customer_id)
+        return str(self.user)
 
 
 class Product(models.Model):
@@ -155,10 +151,10 @@ class Product(models.Model):
     category = models.CharField(max_length=100, choices=CATEGORY_CHOICES)
     subcategory = models.CharField(max_length=100, choices=SUBCATEGORY_CHOICES)
     season = models.CharField(max_length=20, choices=SEASON_CHOICES)
-    type = models.CharField(max_length=20, choices=TYPE_CHOICES)
+    type_choice = models.CharField(max_length=20, choices=TYPE_CHOICES)
     exp_date = models.DateField(blank=True, null=True)
 
-    seller_id = models.ForeignKey(Seller, on_delete=models.CASCADE)
+    seller = models.ForeignKey(Seller, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='product/', blank=True)
 
     def __str__(self):
@@ -175,7 +171,7 @@ class Order(models.Model):
         ('4', 'Delievered'),
         ('9', 'Cancelled'),
     )
-    order_id = models.IntegerField(
+    orderid = models.IntegerField(
         primary_key=True, blank=False, auto_created=True)
     status1 = models.CharField(max_length=20, choices=STATUS_CHOICES)
     status2 = models.CharField(max_length=20, choices=STATUS_CHOICES)
@@ -192,9 +188,9 @@ class Order(models.Model):
     is_delivered = models.BooleanField(default=False)
     deliever_date  = models.DateField(blank=True, null=True)
 
-    productid = models.ForeignKey(Product, on_delete=models.CASCADE)
-    customerid = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    sellerid = models.ForeignKey(Seller, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    seller = models.ForeignKey(Seller, on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.orderid)

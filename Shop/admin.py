@@ -4,19 +4,20 @@ from .models import Seller, Customer, Product, Order
 
 @admin.register(Seller)
 class SellerAdmin(admin.ModelAdmin):
-    list_display = ['name', 'email', 'phone', 'description', 'address', 'password', 'category', 'subcategory']
+    list_display = ['phone']
 
 
 @admin.register(Customer)
 class CustomerAdmin(admin.ModelAdmin):
-    list_display = ['customer_id', 'name', 'email', 'phone', 'address']
+    list_display = ['user', 'image', 'phone', 'residential_address',
+                    'permanent_address', 'delievery_address']
 
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['order_id', 'invoice']
+    list_display = ['orderid']
 
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['product_id', 'name', 'description', 'category', 'subcategory', 'season', 'seller_id', 'image']
+    list_display = ['name']

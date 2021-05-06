@@ -8,12 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="../static/css/base.css">
+    <link rel="stylesheet" href="{% static 'css/messages.css' %}">
 
-    {% block css %}{% endblock %}
-    
-    
     <link rel="stylesheet"
     href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    {% block css %}{% endblock %}
     
     <title>{% block title %}{% endblock %}</title>
      
@@ -42,13 +42,22 @@
 
             <div class="nav-right">
                 <ul class="nav-item-2">
+
+                    {% if user.is_authenticated %}
                     <li>
                         <i class="fa fa-user" aria-hidden="true"></i><button class="login-btn"><a
-                                href="{% url 'login' %}">Login</a></button>
-                            </li>
+                                href="{% url 'Logout' %}">Logout</a></button>
+                    </li>
+                    {% else %}
+                    <li>
+                        <i class="fa fa-user" aria-hidden="true"></i><button class="login-btn"><a
+                                href="{% url 'userlogin' %}">Login</a></button>
+                    </li>
+                    {% endif %}
+
                     <li>
                         <i class="fa fa-caret-down" aria-hidden="true"></i><button class="login-btn"><a
-                            href="{% static 'cart.png' %}">More</a></button>
+                            href="{% url 'userprofile' %}">Profile</a></button>
                     </li>
                     <li>
                         <i class="fa fa-cart-plus" aria-hidden="true"></i><button class="login-btn"><a
@@ -58,6 +67,18 @@
                 </ul>
             </div>           
         </nav>
+
+        
+        {% if messages %}
+        <div class="msg01">
+        <ul class="messages">
+            {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message }} <button id="msg-btn">X</button></li>
+            {% endfor %}
+        </ul>
+        </div>
+        {% endif %}
+
 
         {% block nav %}
             <!-- Second Navigation -->
@@ -121,9 +142,9 @@
         </div>
     </footer>
 
-
-    <script src="../static/script/main.js"></script>
-
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="{% static 'script/msg.js' %}"></script>
     {% block js %} <!-- Include your js file in this block -->  {% endblock%}
 
 </body>
