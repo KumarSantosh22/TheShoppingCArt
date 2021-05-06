@@ -26,7 +26,9 @@ class Seller(models.Model):
     seller_id = models.IntegerField(
         primary_key=True, blank=False, auto_created=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    phone = models.CharField(max_length=12)
+    image = models.ImageField(upload_to='profile/', default='profile/def_user.png', blank=True)
+    phone = models.CharField(max_length=10)
+    dob = models.DateField(null=True, blank=True)
     description = models.TextField(max_length=300)
     gstin = models.CharField(max_length=50)
     category = models.CharField(max_length=100, choices=CATEGORY_CHOICES)
@@ -36,7 +38,7 @@ class Seller(models.Model):
     shop_address = models.TextField(max_length=250)
 
     def __str__(self):
-        return str(self.seller_id)
+        return str(self.user)
 
 
 class Customer(models.Model):
@@ -45,6 +47,7 @@ class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='profile/', default='profile/def_user.png', blank=True)
     phone = models.CharField(max_length=10)
+    dob = models.DateField(null=True, blank=True)
     residential_address = models.TextField(max_length=250)
     permanent_address = models.TextField(max_length=250)
     delievery_address = models.TextField(max_length=250)

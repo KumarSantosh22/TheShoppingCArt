@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
 
 from .models import Seller, Customer
-from .forms import SignUpForm, ProfileEditForm
+from .forms import SignUpForm, ProfileEditForm, SellerSignUpForm
 
 
 def home(request):
@@ -120,9 +120,30 @@ def updateprofile(request):
         redirect('Login')
 
 
+# Managing Seller
 
-def signup_seller(request):
-    return HttpResponse("Seller")
+def seller(request):
+    return render(request, 'about/seller.html')
+
+
+def signupseller(request):
+    if request.method == 'POST':
+        form = SellerSignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+
+            request.session['username'] = username
+            print('*********USER DATA : ', user)
+            seller = Seller(user=user)
+            seller.save()
+            return redirect('home')
+    else:
+        form = SellerSignUpForm()
+    return render(request, 'signup_seller.html', {'form': form})
 
 
 # PRODUCT MANAGEMENT FOR EACH CATEGORY

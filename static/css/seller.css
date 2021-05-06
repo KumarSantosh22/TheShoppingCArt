@@ -1,0 +1,27 @@
+.container09{
+    margin: 1rem;
+    padding: 1rem;
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.container09 h2{
+    text-align: center;
+}
+
+.art01{
+    margin: 1rem;
+    padding: 1rem;
+}
+
+.sec02{
+    margin: .5rem 1rem;
+    padding: .4rem;
+}
+
+.a02{
+    color: #00f;
+}
+.a02:hover{
+    color: #f00;
+}

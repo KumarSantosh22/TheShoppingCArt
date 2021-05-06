@@ -58,3 +58,9 @@
 .tag001:hover{
     color: red;
 }
+
+input[type="checkbox"]{
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
