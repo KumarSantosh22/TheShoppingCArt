@@ -1,0 +1,38 @@
+{%extends 'base.html'%}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/updateprofile.css' %}"> {% endblock %}
+
+{% block title %}Update |Seller Profile{% endblock %}
+
+{% block main %}
+
+    <div class="form01">
+        <form action="{% url 'updateseller' %}" method="POST" class="form02" , enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <h2 class="h02">Update Profile</h2>
+
+            <div style="user-select: auto;">
+                <label for="id_image01" style="user-select: auto;">Current Profile Photo :</label>
+                <img src="{{seller.image.url}}" width="150" height="150" id="id_image01" alt="IMG">
+            </div>
+
+            {% for field in form %}
+                        <div>
+                            <label for="{{field.id_for_label}}">{{field.label}} :</label>{{field}}
+                            {% for error in field.errors %}
+                            <p style="color: red">{{ error }}</p>
+                        
+                            {% endfor %}
+                        </div>
+            {% endfor %}
+
+            <button class="btn01" type="submit" style="user-select: auto;">Update</button>
+
+        </form>
+
+    </div>
+
+{% endblock %}

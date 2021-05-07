@@ -56,8 +56,12 @@
                     {% endif %}
 
                     <li>
-                        <i class="fa fa-caret-down" aria-hidden="true"></i><button class="login-btn"><a
-                            href="{% url 'userprofile' %}">Profile</a></button>
+                        <i class="fa fa-caret-down" aria-hidden="true"></i><button class="login-btn">
+                            {% if user.is_staff %}
+                            <a href="{% url 'sellerprofile' %}">Profile</a></button>
+                            {% else %}
+                            <a href="{% url 'userprofile' %}">Profile</a></button>
+                            {% endif %}
                     </li>
                     <li>
                         <i class="fa fa-cart-plus" aria-hidden="true"></i><button class="login-btn"><a

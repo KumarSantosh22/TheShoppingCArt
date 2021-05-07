@@ -3,11 +3,11 @@ from django.contrib import messages
 import datetime
 
 from django.contrib.auth import login, authenticate, logout
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.contrib.auth.forms import AuthenticationForm
 
 from .models import Seller, Customer
-from .forms import SignUpForm, ProfileEditForm, SellerSignUpForm
+from .forms import SignUpForm, ProfileEditForm, SellerSignUpForm, SellerProfileEditForm
 
 
 def home(request):
@@ -130,7 +130,7 @@ def signupseller(request):
     if request.method == 'POST':
         form = SellerSignUpForm(request.POST)
         if form.is_valid():
-            form.save()
+            gp = form.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
@@ -140,10 +140,61 @@ def signupseller(request):
             print('*********USER DATA : ', user)
             seller = Seller(user=user)
             seller.save()
+
+            group = Group.objects.get(name='GroupSeller')
+            gp.groups.add(group)
+
+            messages.success(request, 'You are now a member of TheShoppingCArt! Thank you! for chosing us.')
+
             return redirect('home')
     else:
         form = SellerSignUpForm()
     return render(request, 'signup_seller.html', {'form': form})
+
+
+def sellerprofile(request):
+    if request.user.is_authenticated:
+        if request.user.is_staff:              
+            user = User.objects.get(username=request.user)
+            seller = Seller.objects.get(user=request.user)
+            return render(request, 'seller_profile.html', {'user': user, 'seller': seller})
+        messages.warning(request, 'You are not not a seller!')
+        return redirect('userlogin')
+    else:
+        messages.info(request, 'Login to acess your profile.')
+        return redirect('userlogin')
+
+
+def updateseller(request):
+    if request.user.is_authenticated:
+        if request.user.is_staff:
+            if request.method == 'POST':
+                user = Seller.objects.get(user=request.user)
+                fmd = SellerProfileEditForm(request.POST, request.FILES, instance=user)
+                print(fmd.is_valid())
+                if fmd.is_valid():
+                    fmd.save()
+                    for d in fmd.cleaned_data.values():
+                        print(d)
+
+                    first_name = fmd.cleaned_data['first_name']
+                    last_name = fmd.cleaned_data['last_name']
+                    email = fmd.cleaned_data['email']
+
+                    User.objects.filter(username=request.user).update(
+                        first_name=first_name, last_name=last_name, email=email)
+
+
+                    messages.success(request, 'Profile Successfully Updated!')
+                    return redirect('sellerprofile')
+
+            user = User.objects.get(username=request.user)
+            seller = Seller.objects.get(user=request.user)
+            form = SellerProfileEditForm()
+            return render(request, 'update_seller_profile.html', {'user': user, 'seller': seller, 'form': form})
+    else:
+        messages.info(request, 'Login to update your profile.')
+        redirect('Login')
 
 
 # PRODUCT MANAGEMENT FOR EACH CATEGORY

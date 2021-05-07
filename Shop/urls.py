@@ -11,6 +11,8 @@ urlpatterns = [
     # Seller urls
     path('seller', views.seller, name='seller'),
     path('signupseller', views.signupseller, name='signupseller'),
+    path('sellerprofile', views.sellerprofile, name='sellerprofile'),
+    path('updateseller', views.updateseller, name='updateseller'),
 
     # Customer urls
     path('signup', views.signup, name='signup'),

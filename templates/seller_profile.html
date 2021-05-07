@@ -1,0 +1,71 @@
+{%extends 'base.html'%}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}"> {% endblock %}
+
+{% block title %}User | Profile{% endblock %}
+<!-- Add your title here -->>
+
+{% block main %}
+
+<div class="profile">
+
+    <aside id="aside01">
+        <div id="img01">
+            <img src="{{seller.image.url}}" alt="IMG">
+        </div>
+        <p>Hello, <strong>{{user.username}}</strong></p>
+    </aside>
+
+    <aside id="aside02">
+        <p><a class="click-me" href="">Shop</a></p>
+    </aside>
+
+    <section id="section01">
+        <div>
+            <h3>Personal Information &nbsp;<a class="up01" href="{% url 'updateseller' %}">Update</a></h3>
+            <input type="text" readonly value="{{user.first_name}}">
+            <input type="text" readonly value="{{user.last_name}}">
+        </div>
+        <div>
+            <h3>Date of Birth</h3>
+            <input type="text" readonly value="{{seller.dob}}">
+        </div>
+        <div>
+            <h3>E-mail Address</h3>
+            <input type="text" readonly value="{{user.email}}">
+        </div>
+        <div>
+            <h3>Mobile Number</h3>
+            <input type="text" readonly value="{{seller.phone}}">
+        </div>
+        <div>
+            <h3>Address Information</h3>
+            <p>
+                <label for="">Current Address</label>
+                <input type="text" readonly value="{{seller.residential_address}}">
+            </p>
+            <p>
+                <label for="">Permanent Address</label>
+                <input type="text" readonly value="{{seller.permanent_address}}">
+            </p>
+            <p>
+                <label for="">Shop Address</label>
+                <input type="text" readonly value="{{seller.shop_address}}">
+            </p>
+        </div>
+        <div>
+            <h5>Warning! Danger Zone</h5>
+            <a href="">Deactivate Account</a>
+        </div>
+
+    </section>
+
+    <aside id="aside03">
+        <p><a class="click-me" href="{% url 'Logout' %}">Logout</a></p>
+    </aside>
+
+</div>
+
+{% endblock %}

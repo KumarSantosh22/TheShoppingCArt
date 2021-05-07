@@ -45,6 +45,7 @@ class SellerSignUpForm(UserCreationForm):
     last_name = forms.CharField(max_length=30, required=True)
     email = forms.EmailField(
         max_length=254, help_text='Required. Enter a valid email address.')
+    is_staff = forms.BooleanField(required=True)
 
     class Meta:
         model = User
@@ -56,14 +57,20 @@ class SellerSignUpForm(UserCreationForm):
         error_message = {'is_staff': {
             'required': 'Must Agree All Terms&Conditions'}}
 
-        def clean(self):
-            cleaned_data = super().clean()
-            is_staff = cleaned_data.get('is_staff')
-            if is_staff is not True:
-                raise ValidationError("Must Agree All Terms&Conditions.")
-            return is_staff
-
 
 class SellerProfileEditForm(forms.ModelForm):
+    first_name = forms.CharField(
+        max_length=50, required=True,  label='First Name')
+    last_name = forms.CharField(
+        max_length=50, label='Last Name', required=False)
+    email = forms.EmailField(
+        max_length=50, help_text='characters not exceeding 50 chars')
+    dob = forms.DateField(required=True, label='DoB',
+                          widget=DateInput)
+
     class Meta:
-        pass
+        model = Seller
+        fields = ['image', 'first_name', 'last_name', 'email', 'phone', 'dob', 'gstin', 'category', 'subcategory', 'residential_address',
+                  'permanent_address', 'shop_address']
+        labels = {'gstin':'GSTIN', 'residential_address': 'Residential Address',
+                  'permanent_address': 'Permanent Address', 'shop_address': 'Shop Address'}
