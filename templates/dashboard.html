@@ -1,0 +1,53 @@
+{%extends 'base.html'%}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}"> {% endblock %}
+
+{% block title %}Seller | DASHBOARD{% endblock %}
+
+{% block main %}
+
+    <div class="dashboard">
+        <div class="panel">
+            <h2>SHOP ADMINISTRATION DASHBOARD</h2>
+        </div>
+        <section id="left01" class="flex-me">
+            <div class="img01">
+                <img src="{{seller.image.url}}" alt="IMG">
+            </div>
+            <h3>Hello, {{user.username}}</h3>
+        </section>
+
+        <section id="left02" class="flex-me">
+            <h3>Summary</h3>
+        </section>
+
+        <section id="left03" class="flex-me">
+            <h3>Warning! Danger Zone</h3>
+            <button class="dash-btn">Remove Product</button>
+        </section>
+
+        <section id="right01">
+            <h3>Product Information</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>
+                            {{product.keys}}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{product.values}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+{% endblock %}
+
+{% block js %}
+<!-- Add your inline javascript here  -->
+{% endblock%}

@@ -6,8 +6,8 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.forms import AuthenticationForm
 
-from .models import Seller, Customer
-from .forms import SignUpForm, ProfileEditForm, SellerSignUpForm, SellerProfileEditForm
+from .models import Seller, Customer, Product, Order
+from .forms import SignUpForm, ProfileEditForm, SellerSignUpForm, SellerProfileEditForm, ProductForm
 
 
 def home(request):
@@ -33,6 +33,7 @@ def page_not_found(request):
 
 
 # USER, SELLER, CUSTOMER AUTHENTICATION AND AUTHORIZATION MANAGEMENT
+
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -195,6 +196,13 @@ def updateseller(request):
     else:
         messages.info(request, 'Login to update your profile.')
         redirect('Login')
+
+
+def dashboard(request):
+    if request.user.is_authenticated and request.user.is_staff:
+        seller = Seller.objects.get(user=request.user)
+        messages.success(request, 'Welcome to Admin Dashboard')
+        return render(request, 'dashboard.html', {'seller': seller})
 
 
 # PRODUCT MANAGEMENT FOR EACH CATEGORY

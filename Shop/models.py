@@ -1,7 +1,7 @@
 from django.db import models
 import datetime
 from django.contrib.auth.models import User
-
+from decimal import Decimal
 class Seller(models.Model):
 
     CATEGORY_CHOICES = (
@@ -140,25 +140,24 @@ class Product(models.Model):
 
     product_id = models.IntegerField(
         primary_key=True, blank=False, auto_created=True)
+    seller = models.ForeignKey(Seller, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='product/', blank=True)
     name = models.CharField(max_length=100)
     brand = models.CharField(max_length=100)
     model = models.CharField(max_length=100)
     year = models.IntegerField()
     description = models.TextField(max_length=500)
-    price = models.IntegerField(blank=False)
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=Decimal('1.00'))
     in_stock = models.BooleanField(default=True)
     stock_qty = models.IntegerField(blank=False)
     reorder_qty = models.IntegerField(blank=False)
     is_discount = models.BooleanField(default=False)
-    discount = models.IntegerField()
+    discount = models.DecimalField(max_digits=2, decimal_places=2, default=Decimal('0.00'))
     category = models.CharField(max_length=100, choices=CATEGORY_CHOICES)
     subcategory = models.CharField(max_length=100, choices=SUBCATEGORY_CHOICES)
     season = models.CharField(max_length=20, choices=SEASON_CHOICES)
     type_choice = models.CharField(max_length=20, choices=TYPE_CHOICES)
     exp_date = models.DateField(blank=True, null=True)
-
-    seller = models.ForeignKey(Seller, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='product/', blank=True)
 
     def __str__(self):
         return str(self.product_id)

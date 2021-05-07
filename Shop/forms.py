@@ -1,7 +1,8 @@
 from django import forms
-from .models import Customer, Seller
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+
+from .models import Customer, Seller, Product, Order
 
 
 class SignUpForm(UserCreationForm):
@@ -74,3 +75,10 @@ class SellerProfileEditForm(forms.ModelForm):
                   'permanent_address', 'shop_address']
         labels = {'gstin':'GSTIN', 'residential_address': 'Residential Address',
                   'permanent_address': 'Permanent Address', 'shop_address': 'Shop Address'}
+
+
+class ProductForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = '__all__'
+        exclude = ['product_id']
