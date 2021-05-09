@@ -1,0 +1,52 @@
+.btn02{
+    margin: .4rem;
+    padding: .4rem;
+    outline: none;
+    cursor: pointer;
+    color: #eee;
+    background: blue;
+    border-radius: .5rem;
+    font-weight: bold;
+    width: 4rem;
+    font-weight: 900;
+}
+.btn02:hover{
+    background: rgb(39, 39, 245);
+}
+
+.form01{
+    margin: 1rem;
+    padding: 1rem;
+}
+
+.h02{
+    padding: 1rem;
+}
+
+.lab01{
+    margin: 1rem;
+    padding: 1rem;
+}
+div input{
+    margin: .1rem;
+    padding: .4rem;
+    font-weight: bold;
+    width: 50%;
+}
+
+input[type="checkbox"]{
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+select{
+    margin: .4rem;
+    padding: .4rem;
+}
+
+textarea{
+    margin: .1rem;
+    padding: .4rem;
+    font-weight: bold;
+}

@@ -201,8 +201,22 @@ def updateseller(request):
 def dashboard(request):
     if request.user.is_authenticated and request.user.is_staff:
         seller = Seller.objects.get(user=request.user)
+        product = Product.objects.all()
         messages.success(request, 'Welcome to Admin Dashboard')
-        return render(request, 'dashboard.html', {'seller': seller})
+        return render(request, 'dashboard.html', {'seller': seller, 'products': product})
+
+
+def addproduct(request):
+    if request.user.is_authenticated and request.user.is_staff:
+        if request.method == 'POST':
+            form = ProductForm(request.POST, request.FILES)
+            if form.is_valid():
+                Product.objects.create(seller=request.user, image=form.cleaned_data['image'],name=form.cleaned_data['name'],brand=form.cleaned_data['brand'],model=form.cleaned_data['model'],year=form.cleaned_data['year'],description=form.cleaned_data['description'],price=form.cleaned_data['price'],in_stock=form.cleaned_data['in_stock'],stock_qty=form.cleaned_data['stock_qty'],reorder_qty=form.cleaned_data['reorder_qty'],is_discount=form.cleaned_data['is_discount'],discount=form.cleaned_data['discount'],category=form.cleaned_data['category'],subcategory=form.cleaned_data['subcategory'],season=form.cleaned_data['season'],type_choice=form.cleaned_data['type_choice'],exp_date=form.cleaned_data['exp_date'])
+                for f in form.cleaned_data.values():
+                    print(f)
+                messages.success(request, 'Product added successfully.')
+        form = ProductForm()
+        return render(request, 'product/add_products.html', {'form':form})
 
 
 # PRODUCT MANAGEMENT FOR EACH CATEGORY

@@ -2,6 +2,7 @@ from django.db import models
 import datetime
 from django.contrib.auth.models import User
 from decimal import Decimal
+
 class Seller(models.Model):
 
     CATEGORY_CHOICES = (
@@ -137,10 +138,10 @@ class Product(models.Model):
         ('5', 'Party Wear'),
         ('6', 'Ethnic Wear'),
     )
-
+    
     product_id = models.IntegerField(
         primary_key=True, blank=False, auto_created=True)
-    seller = models.ForeignKey(Seller, on_delete=models.CASCADE)
+    seller = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='product/', blank=True)
     name = models.CharField(max_length=100)
     brand = models.CharField(max_length=100)
@@ -152,7 +153,7 @@ class Product(models.Model):
     stock_qty = models.IntegerField(blank=False)
     reorder_qty = models.IntegerField(blank=False)
     is_discount = models.BooleanField(default=False)
-    discount = models.DecimalField(max_digits=2, decimal_places=2, default=Decimal('0.00'))
+    discount = models.DecimalField(max_digits=4, decimal_places=2, default=Decimal('0.00'))
     category = models.CharField(max_length=100, choices=CATEGORY_CHOICES)
     subcategory = models.CharField(max_length=100, choices=SUBCATEGORY_CHOICES)
     season = models.CharField(max_length=20, choices=SEASON_CHOICES)

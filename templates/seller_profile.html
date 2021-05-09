@@ -11,14 +11,14 @@
 
 <div class="profile">
 
-    <aside id="aside01">
+    <aside id="aside01" class="flex-me">
         <div id="img01">
             <img src="{{seller.image.url}}" alt="IMG">
         </div>
         <p>Hello, <strong>{{user.username}}</strong></p>
     </aside>
 
-    <aside id="aside02">
+    <aside id="aside02" class="flex-me">
         <p><a class="click-me" href="{% url 'dashboard' %}">Shop</a></p>
         
     </aside>
@@ -63,7 +63,7 @@
 
     </section>
 
-    <aside id="aside03">
+    <aside id="aside03" class="flex-me">
         <p><a class="click-me" href="{% url 'Logout' %}">Logout</a></p>
     </aside>
 

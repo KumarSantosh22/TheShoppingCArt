@@ -76,3 +76,10 @@
 .up01:hover{
   color: rgb(226, 3, 3);
 }
+
+.flex-me {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column wrap;
+}

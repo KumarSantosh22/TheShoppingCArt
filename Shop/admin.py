@@ -13,11 +13,13 @@ class CustomerAdmin(admin.ModelAdmin):
                     'permanent_address', 'delievery_address']
 
 
+@admin.register(Product)
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ['name','product_id', 'seller', 'price', 'is_discount','discount', 'description', 'image',
+                    'category', 'subcategory', 'stock_qty', 'in_stock', 'reorder_qty', 'year', 'type_choice']
+
+
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
     list_display = ['orderid']
 
-
-@admin.register(Product)
-class ProductAdmin(admin.ModelAdmin):
-    list_display = ['name']
