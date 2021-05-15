@@ -10,9 +10,6 @@
   --bgcolor: rgb(9, 4, 88);
 }
 
-body{
-  width: fit-content;
-}
 
 /* *****************************NAVBAR SECTION*************************************** */
 
@@ -279,6 +276,12 @@ footer h2 {
 
 /* ********************************RESPONSIVE DESIGN******************************  */
 /* Media Query */
+@media only screen and (min-width: 100px) and (max-width:1155px){
+  html {
+    width: fit-content;
+  }
+}
+
 @media only screen and (min-width: 1156px) {
   .nav-right {
     position: absolute;
@@ -287,6 +290,5 @@ footer h2 {
     right: 0px;
   }
 }
-
 
 /*  */
