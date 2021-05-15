@@ -223,9 +223,28 @@ def addproduct(request):
 # PRODUCT MANAGEMENT FOR EACH CATEGORY
 
 def product(request, id):
-    # This function is for view details
+    # This function is for view details of product
     product = Product.objects.get(pk=id)
     return render(request, 'product.html', {'product':product})
+
+
+def delproduct(request, id):
+    prod = Product.objects.get(pk=id)
+    prod.delete()
+    messages.success(request, 'Product Successfully Deleted.')
+    return redirect('dashboard')
+
+
+def updateproduct(request, id):
+    if id is not None:
+        prod = Product.objects.get(pk=id)
+    form = ProductForm()
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES, instance=prod)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard')
+    return render(request, 'product/update_product.html', {'form':form})
 
 
 def products_electronics(request):

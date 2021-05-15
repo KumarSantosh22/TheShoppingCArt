@@ -68,8 +68,8 @@
                         <td>{{product.year}}</td>
                         <td>{{product.type_choice}}</td>
                         <td>{{product.season}}</td>
-                        <td><a href="" class="dash-btn red-me">Del</a></td>
-                        <td><a href="" class="dash-btn">Update</a></td>
+                        <td><a href="delproduct/{{product.pk}}" class="dash-btn red-me">Del</a></td>
+                        <td><a href="updateproduct/{{product.pk}}" class="dash-btn">Update</a></td>
                     </tr>
                         {% endfor %}
                 </tbody>

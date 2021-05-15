@@ -24,8 +24,10 @@ urlpatterns = [
 
     # Products
     path('product/<int:id>', views.product, name='product'),
-    path('checkout', views.checkout, name='checkout'),
     path('addproduct', views.addproduct, name='addproduct'),
+    path('updateproduct/<int:id>', views.updateproduct, name='updateproduct'),
+    path('delproduct/<int:id>', views.delproduct, name='delproduct'),
+    path('checkout', views.checkout, name='checkout'),
 
     # Others
     path("privacy",views.privacy,name="privacy"),
