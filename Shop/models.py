@@ -1,5 +1,6 @@
 from django.db import models
 import datetime
+from django.core.validators import MaxValueValidator
 from django.contrib.auth.models import User
 from decimal import Decimal
 
@@ -159,6 +160,8 @@ class Product(models.Model):
     season = models.CharField(max_length=20, choices=SEASON_CHOICES)
     type_choice = models.CharField(max_length=20, choices=TYPE_CHOICES)
     exp_date = models.DateField(blank=True, null=True)
+    rating = models.PositiveIntegerField(
+        default=0, validators=[MaxValueValidator(5)])
 
     def __str__(self):
         return str(self.product_id)

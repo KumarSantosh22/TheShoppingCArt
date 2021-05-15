@@ -3,13 +3,13 @@
   padding: 0.2rem;
   display: grid;
   overflow: hidden;
-  grid-template-columns: 15% 78%;
+  grid-template-columns: 15% 83%;
   grid-gap: 1rem;
   grid-template-areas:
     "panel panel"
-    "left01 right01"
-    "left02 right01"
-    "left03 right01";
+    "left01 left02"
+    "left01 left03"
+    "right01 right01";
 }
 
 .panel {
@@ -85,5 +85,14 @@
 
 table, th, td {
   border: 1px solid black;
-  white-space: nowrap;
+  white-space: wrap;
+}
+
+tbody{
+  margin: 0.1rem;
+}
+
+
+.red-me{
+  background-color: red;
 }

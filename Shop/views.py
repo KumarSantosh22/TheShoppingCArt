@@ -11,7 +11,8 @@ from .forms import SignUpForm, ProfileEditForm, SellerSignUpForm, SellerProfileE
 
 
 def home(request):
-    return render(request, 'index.html')
+    products = Product.objects.all()
+    return render(request, 'index.html', {'products': products})
 
 
 def about(request):
@@ -211,7 +212,7 @@ def addproduct(request):
         if request.method == 'POST':
             form = ProductForm(request.POST, request.FILES)
             if form.is_valid():
-                Product.objects.create(seller=request.user, image=form.cleaned_data['image'],name=form.cleaned_data['name'],brand=form.cleaned_data['brand'],model=form.cleaned_data['model'],year=form.cleaned_data['year'],description=form.cleaned_data['description'],price=form.cleaned_data['price'],in_stock=form.cleaned_data['in_stock'],stock_qty=form.cleaned_data['stock_qty'],reorder_qty=form.cleaned_data['reorder_qty'],is_discount=form.cleaned_data['is_discount'],discount=form.cleaned_data['discount'],category=form.cleaned_data['category'],subcategory=form.cleaned_data['subcategory'],season=form.cleaned_data['season'],type_choice=form.cleaned_data['type_choice'],exp_date=form.cleaned_data['exp_date'])
+                Product.objects.create(seller=request.user, image=form.cleaned_data['image'],name=form.cleaned_data['name'],brand=form.cleaned_data['brand'],model=form.cleaned_data['model'],year=form.cleaned_data['year'],description=form.cleaned_data['description'],price=form.cleaned_data['price'],in_stock=form.cleaned_data['in_stock'],stock_qty=form.cleaned_data['stock_qty'],reorder_qty=form.cleaned_data['reorder_qty'],is_discount=form.cleaned_data['is_discount'],discount=form.cleaned_data['discount'],category=form.cleaned_data['category'],subcategory=form.cleaned_data['subcategory'],season=form.cleaned_data['season'],type_choice=form.cleaned_data['type_choice'],exp_date=form.cleaned_data['exp_date'], rating=form.cleaned_data['rating'])
                 for f in form.cleaned_data.values():
                     print(f)
                 messages.success(request, 'Product added successfully.')
@@ -221,8 +222,10 @@ def addproduct(request):
 
 # PRODUCT MANAGEMENT FOR EACH CATEGORY
 
-def products(request):
-    return HttpResponse("products")
+def product(request, id):
+    # This function is for view details
+    product = Product.objects.get(pk=id)
+    return render(request, 'product.html', {'product':product})
 
 
 def products_electronics(request):
@@ -266,7 +269,7 @@ def checkout(request):
     return render(request, 'cart.html')
 
 
-# Anish tiwari
+# Footer Items
 
 def privacy(request):
     return render(request, "policy/privacy.html")

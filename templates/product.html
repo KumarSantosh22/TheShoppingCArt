@@ -1,0 +1,62 @@
+{%extends 'base.html'%}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}"> {% endblock %}
+<!-- Add your css link here  -->
+
+{% block title %}TheShoppingCArt{% endblock %}
+<!-- Add your title here -->>
+
+{% block main %}
+
+    <div class="view01">
+        <div>
+            <img height="640px" width="480" src="{{product.image.url}}" alt="product">
+        </div>
+        <div>
+            <p class="prod-font01"><strong>{{product.name}} <span class="badge">{{product.rating}}&nbsp;<i class="fa fa-star" aria-hidden="true" style="font-size:10px;color:yellow"></i>&nbsp;ratings</i></span></strong></p>
+            <p class="prod-font01">{{product.category}}</p>
+            <p class="prod-font01">{{product.subcategory}}</p>
+            <p class="prod-font01">{{product.description}}</p>
+            <p class="prod-font01">{{product.stock}}</p>
+            <p class="prod-font01">{{product.year}}</p>
+            <p class="prod-font01">{{product.model}}</p>
+            <p class="prod-font01">&#8377; {{product.price}}</p>
+            <p><button class="cart-btn"> Add to Cart</button></p>
+        </div>
+    </div>
+
+    <div class="container">
+    
+        <h2>Similar Products</h2>
+        <div class="items">
+    
+            {% for product in products %}
+            <div class="item">
+                <p><img height="150px" width="150" src="{{product.image.url}}" alt="product"></p>
+                <p class="prod-font">{{product.name}}</p>
+                <p class="prod-font">{{product.subcategory}}</p>
+                <p class="prod-font">{{product.description|slice:":30"}}<strong> . . .</strong></p>
+                <p class="prod-font">&#8377; {{product.price}}</p>
+                <p class="prod-font"><a href="/product/{{product.pk}}">View Details<b> . . .</b></a>&nbsp;
+                    <button class="cart-btn"> Add to Cart</button>
+                </p>
+            </div>
+            {% endfor %}
+    
+            <div>
+                <p>
+                    <button class="load-more-btn">Load more...</button>
+                </p>
+            </div>
+        </div>
+    
+    </div>
+
+
+{% endblock %}
+
+{% block js %}
+<!-- Add your inline javascript here  -->
+{% endblock%}
