@@ -61,11 +61,11 @@ class Customer(models.Model):
 class Product(models.Model):
 
     SEASON_CHOICES = (
-        ('0', "All Season"),
-        ('1', "Spring 1 March"),
-        ('2', "Summer 1 June"),
-        ('3', "Autumn 1 September"),
-        ('4', "Winter 1 December"),
+        ('All', "All Season"),
+        ('Spring', "Spring 1 March"),
+        ('Summer', "Summer 1 June"),
+        ('Autumn', "Autumn 1 September"),
+        ('Winter', "Winter 1 December"),
     )
 
     CATEGORY_CHOICES = (
@@ -104,19 +104,19 @@ class Product(models.Model):
                    ('T-Shirts', 'T-Shirts'),
                    ('Shoes', 'Shoes'),
                    ('Accessories', 'Accessories'),)),
-        ('Kids', (('0', 'clothes for upto 2yrs kids'),
-                  ('1', 'clothes for upto 5yrs kids'),
-                  ('2', 'clothes for upto 10yrs kids'),
-                  ('3', 'clothes for upto 15yrs kids'),
-                  ('4', 'clothes for above 15yrs kids'),)),
+        ('Kids', (('clothes for upto 2yrs kids', 'clothes for upto 2yrs kids'),
+                  ('clothes for upto 5yrs kids', 'clothes for upto 5yrs kids'),
+                  ('clothes for upto 10yrs kids', 'clothes for upto 10yrs kids'),
+                  ('clothes for upto 15yrs kids', 'clothes for upto 15yrs kids'),
+                  ('clothes for above 15yrs kids', 'clothes for above 15yrs kids'),)),
         ('Computers', (('PC', 'PC'),
                        ('Laptops', 'Laptops'),
                        ('Accessories', 'Accessories'),
                        ('Others', 'Others'))),
-        ('Phones & Tablets', (('0', 'Bar Phones'),
-                              ('1', 'Smartphones'),
-                              ('2', 'Smart Tablets'),
-                              ('3', 'Others'))),
+        ('Phones & Tablets', (('Bar Phones', 'Bar Phones'),
+                              ('Smartphones', 'Smartphones'),
+                              ('Smart Tablets', 'Smart Tablets'),
+                              ('Others', 'Others'))),
         ('Books', (('Literature', 'Literature'),
                    ('Comics', 'Comics'),
                    ('Story', 'Story'),
@@ -131,13 +131,13 @@ class Product(models.Model):
     )
 
     TYPE_CHOICES = (
-        ('0', 'None'),
-        ('1', 'New Arrivals'),
-        ('2', 'Trending'),
-        ('3', 'Sales'),
-        ('4', 'Regular Use'),
-        ('5', 'Party Wear'),
-        ('6', 'Ethnic Wear'),
+        ('None', 'None'),
+        ('New', 'New Arrivals'),
+        ('Trending', 'Trending'),
+        ('Sales', 'Sales'),
+        ('Regular', 'Regular Use'),
+        ('Party', 'Party Wear'),
+        ('Ethnic', 'Ethnic Wear'),
     )
     
     product_id = models.IntegerField(
@@ -160,8 +160,7 @@ class Product(models.Model):
     season = models.CharField(max_length=20, choices=SEASON_CHOICES)
     type_choice = models.CharField(max_length=20, choices=TYPE_CHOICES)
     exp_date = models.DateField(blank=True, null=True)
-    rating = models.PositiveIntegerField(
-        default=0, validators=[MaxValueValidator(5)])
+    rating = models.DecimalField(max_digits=2, decimal_places=1, default=Decimal('0.0'), validators=[MaxValueValidator(5.0)])
 
     def __str__(self):
         return str(self.product_id)
@@ -171,11 +170,11 @@ class Order(models.Model):
 
     STATUS_CHOICES = (
         ('NA', '--Not-Available--'),
-        ('1', 'Ordered'),
-        ('2', 'Packed'),
-        ('3', 'Shipped'),
-        ('4', 'Delievered'),
-        ('9', 'Cancelled'),
+        ('Ordered', 'Ordered'),
+        ('Packed', 'Packed'),
+        ('Shipped', 'Shipped'),
+        ('Delievered', 'Delievered'),
+        ('Cancelled', 'Cancelled'),
     )
     orderid = models.IntegerField(
         primary_key=True, blank=False, auto_created=True)

@@ -19,7 +19,7 @@
     </aside>
 
     <aside id="aside02" class="flex-me">
-        <p><a class="click-me" href="{% url 'dashboard' %}">Shop</a></p>
+        <p><a class="click-me" href="{% url 'dashboard' %}"><strong>Shop Dashboard</strong></a></p>
         
     </aside>
 
@@ -32,6 +32,10 @@
         <div>
             <h3>Date of Birth</h3>
             <input type="text" readonly value="{{seller.dob}}">
+        </div>
+        <div>
+            <h3>GSTIN</h3>
+            <input type="text" readonly value="{{seller.gstin}}">
         </div>
         <div>
             <h3>E-mail Address</h3>

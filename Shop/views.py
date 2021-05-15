@@ -192,7 +192,7 @@ def updateseller(request):
 
             user = User.objects.get(username=request.user)
             seller = Seller.objects.get(user=request.user)
-            form = SellerProfileEditForm()
+            form = SellerProfileEditForm(instance=seller)
             return render(request, 'update_seller_profile.html', {'user': user, 'seller': seller, 'form': form})
     else:
         messages.info(request, 'Login to update your profile.')
@@ -238,11 +238,12 @@ def delproduct(request, id):
 def updateproduct(request, id):
     if id is not None:
         prod = Product.objects.get(pk=id)
-    form = ProductForm()
+    form = ProductForm(instance=prod)
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES, instance=prod)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Updated Successfully')
             return redirect('dashboard')
     return render(request, 'product/update_product.html', {'form':form})
 

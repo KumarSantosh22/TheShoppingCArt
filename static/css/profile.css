@@ -33,6 +33,9 @@
   grid-area: info;
   background-color: rgb(66, 206, 248);
   padding: 1rem;
+  display: flex;
+  flex-flow: column wrap;
+  overflow: auto;
 }
 
 #section01 div{
