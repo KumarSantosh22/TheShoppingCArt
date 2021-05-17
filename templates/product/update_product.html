@@ -1,0 +1,32 @@
+{%extends 'base.html'%}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/products.css' %}"> {% endblock %}
+
+{% block title %}Product | Update{% endblock %}
+
+{% block main %}
+
+<div class="form01">
+    <form action="" method="POST" class="form02" , enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <h2 class="h02">Update data of product : </h2>
+
+        {% for field in form %}
+        <div>
+            <label class="lab01" for="{{field.id_for_label}}">{{field.label}} :</label>{{field}}
+            {% for error in field.errors %}
+            <p style="color: red">{{ error }}</p>
+            {% endfor %}
+        </div>
+        {% endfor %}
+
+        <button class="btn02" type="submit" style="user-select: auto;">Update</button>
+
+    </form>
+
+</div>
+
+{% endblock %}
