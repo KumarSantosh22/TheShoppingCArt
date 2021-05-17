@@ -65,8 +65,8 @@
                     </li>
                     <li>
                         <i class="fa fa-cart-plus" aria-hidden="true"></i><button class="login-btn"><a
-                                href="{% url 'checkout' %}">Cart
-                            </a><span>0</span></button>
+                                href="{% url 'cartitem' %}">Cart
+                            </a><span>{{ request.session.total_items_in_cart }}</span></button>
                     </li>
                 </ul>
             </div>           
@@ -148,7 +148,32 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.js"
         integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
     <script src="{% static 'script/msg.js' %}"></script>
+
+        <script type="text/javascript">
+        var user = '{{request.user}}'
+        
+        function getToken(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        const csrftoken = getToken('csrftoken');
+    </script>
+    
+    <script src="{% static 'script/cart.js' %}"></script>
+    
     {% block js %} <!-- Include your js file in this block -->  {% endblock%}
 
 </body>

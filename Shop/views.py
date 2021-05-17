@@ -1,12 +1,14 @@
 from django.shortcuts import render, redirect, HttpResponse
+from django.http import JsonResponse
 from django.contrib import messages
 import datetime
+import json
 
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.forms import AuthenticationForm
 
-from .models import Seller, Customer, Product, Order
+from .models import Seller, Customer, Product, Order, CartItem
 from .forms import SignUpForm, ProfileEditForm, SellerSignUpForm, SellerProfileEditForm, ProductForm
 
 
@@ -248,6 +250,9 @@ def updateproduct(request, id):
     return render(request, 'product/update_product.html', {'form':form})
 
 
+
+# Different Product Pages
+
 def products_electronics(request):
     return HttpResponse("")
 
@@ -293,6 +298,58 @@ def checkout(request):
 
 def privacy(request):
     return render(request, "policy/privacy.html")
+
+
+# Managing Cart
+
+def updateitem(request):
+    json_data = json.loads(request.body)
+    productId = json_data['productId']
+    action = json_data['action']
+    print('Product ID: ', productId)
+    print('Action: ', action)
+
+    customer = Customer.objects.get(user=request.user)
+    product = Product.objects.get(pk=productId)
+
+    print(json_data)
+    order, created = Order.objects.get_or_create(customer=customer)
+    orderItem, created = CartItem.objects.get_or_create(order=order, product=product)
+
+    if action == 'add':
+        if orderItem.quantity:
+            orderItem.quantity += 1
+        else:
+            orderItem.quantity = 1
+    elif action == 'remove':
+        if orderItem.quantity > 0:
+            orderItem.quantity -= 1
+        else:
+            orderItem.quantity = 0
+
+    orderItem.save()
+
+    if orderItem.quantity <= 0:
+        orderItem.delete()
+
+    
+    return JsonResponse('Item was added', safe=False)
+
+
+def cartitem(request):
+    cart = CartItem.objects.all()
+    print(cart.values())
+    invoice = 0
+    total_qty = 0
+    for item in cart:
+        item.total = item.product.price * item.quantity
+        invoice += item.total
+        total_qty += item.quantity
+        print(invoice, total_qty)
+        print(item.product.name)
+    request.session['total_items_in_cart'] = total_qty
+
+    return render(request, 'cart.html', {'cart': cart, 'invoice':invoice, 'total_qty':total_qty})
 
 
 

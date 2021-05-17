@@ -178,24 +178,31 @@ class Order(models.Model):
     )
     orderid = models.IntegerField(
         primary_key=True, blank=False, auto_created=True)
-    status1 = models.CharField(max_length=20, choices=STATUS_CHOICES)
-    status2 = models.CharField(max_length=20, choices=STATUS_CHOICES)
-    status3 = models.CharField(max_length=20, choices=STATUS_CHOICES)
-    status4 = models.CharField(max_length=20, choices=STATUS_CHOICES)
-    invoice = models.IntegerField()
-    no_of_items = models.IntegerField()
+    status = models.CharField(
+        max_length=20, choices=STATUS_CHOICES, default='NA')
+    invoice = models.IntegerField(default=0)
+    no_of_items = models.IntegerField(default=0)
     order_date = models.DateField(blank=True, null=True)
     shipping_date = models.DateField(blank=True, null=True)
     shipping_address = models.TextField(max_length=250)
 
     is_shipped = models.BooleanField(default=False)
-    is_cancelled = models.BooleanField(default=False)
     is_delivered = models.BooleanField(default=False)
+    is_cancelled = models.BooleanField(default=False)
     deliever_date  = models.DateField(blank=True, null=True)
 
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    seller = models.ForeignKey(Seller, on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.orderid)
+
+
+class CartItem(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=0)
+    total = models.IntegerField(default=0)
+
+    def __str__(self):
+        return str(self.order)
+
