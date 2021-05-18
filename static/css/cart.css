@@ -2,7 +2,7 @@
   margin: 0.5em 1em;
   padding: 0.2em;
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: column wrap;
   justify-content: center;
   align-items: center;
   align-content: center;
@@ -43,9 +43,7 @@
 }
 
 
-div > button {
-  position: relative;
-  right: -1300px;
+#btn09 a {
   margin: 0.1em 0.5em;
   padding: 0.4em 0.5em;
   font-size: 1em;
@@ -55,6 +53,7 @@ div > button {
   border-radius: 0.3em;
   border: none;
 }
-div > button:hover {
+
+#btn09 a:hover {
   background-color: rgba(1, 1, 99, 0.9);
 }

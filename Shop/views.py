@@ -289,11 +289,6 @@ def products_(accessories):
     pass
 
 
-# CART ITEMS
-def checkout(request):
-    return render(request, 'cart.html')
-
-
 # Footer Items
 
 def privacy(request):
@@ -314,6 +309,7 @@ def updateitem(request):
 
     print(json_data)
     order, created = Order.objects.get_or_create(customer=customer)
+    request.session['order']=order.pk
     orderItem, created = CartItem.objects.get_or_create(order=order, product=product)
 
     if action == 'add':
@@ -329,28 +325,51 @@ def updateitem(request):
 
     orderItem.save()
 
+    if request.session.get('total_price') and request.session.get('total_items_in_cart'):
+        order.invoice = request.session.get('total_price')
+        order.no_of_items = request.session.get('total_items_in_cart')
+        order.save()
+
     if orderItem.quantity <= 0:
         orderItem.delete()
 
-    
     return JsonResponse('Item was added', safe=False)
 
 
 def cartitem(request):
-    cart = CartItem.objects.all()
+    cart = CartItem.objects.filter(order=request.session.get('order'))
     print(cart.values())
     invoice = 0
     total_qty = 0
     for item in cart:
         item.total = item.product.price * item.quantity
+        item.save()
         invoice += item.total
         total_qty += item.quantity
         print(invoice, total_qty)
         print(item.product.name)
     request.session['total_items_in_cart'] = total_qty
+    request.session['total_price'] = int(invoice)
 
     return render(request, 'cart.html', {'cart': cart, 'invoice':invoice, 'total_qty':total_qty})
 
+
+def checkout(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        contact = request.POST.get('contact')
+        addr1 = request.POST.get('addr1')
+        addr2 = request.POST.get('addr2')
+        addr3 = request.POST.get('addr3')
+        addr4 = request.POST.get('addr4')
+        addr5 = request.POST.get('addr5')
+        addr6 = request.POST.get('addr6')
+        address = f'{addr1}, {addr2}, {addr3}, {addr6},\n {addr4}, {addr5}'
+        billed_amount = request.POST.get('billed_amount')
+        print(name, email, contact, address, billed_amount)
+        
+    return render(request, 'product/checkout.html')
 
 
 # Test Page for Front End Developer

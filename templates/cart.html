@@ -45,9 +45,11 @@
                 {% endfor %}
             </tbody>
         </table>
-    </div>
-    <div>
-        <button type="submit">Checkout</button>
+
+        <div id="btn09">
+            <a href="{% url 'checkout' %}">Checkout</a>
+        </div>
+
     </div>
 
 {% endblock %}

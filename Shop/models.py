@@ -186,11 +186,13 @@ class Order(models.Model):
     shipping_date = models.DateField(blank=True, null=True)
     shipping_address = models.TextField(max_length=250)
 
+    is_complete = models.BooleanField(default=False)
     is_shipped = models.BooleanField(default=False)
     is_delivered = models.BooleanField(default=False)
     is_cancelled = models.BooleanField(default=False)
-    deliever_date  = models.DateField(blank=True, null=True)
+    deliever_date = models.DateField(blank=True, null=True)
 
+    transaction_id = models.CharField(max_length=20, null=True)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -205,4 +207,3 @@ class CartItem(models.Model):
 
     def __str__(self):
         return str(self.order)
-

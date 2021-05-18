@@ -11,6 +11,7 @@ for (let i = 0; i < updateBtn.length; i++) {
     console.log("USER: ", user);
     if (user == "AnonymousUser") {
       console.log("User is Unauthenticated");
+      alert("Please login in order to add items to cart.")
     } else {
       updateUserOrder(productId, action);
     }
