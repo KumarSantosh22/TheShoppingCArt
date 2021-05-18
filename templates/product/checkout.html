@@ -1,0 +1,120 @@
+{%extends 'base.html'%}
+{% load static %}
+
+{% block css %}<link rel="stylesheet" href="{% static 'css/checkout.css' %}">{% endblock %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block main %}
+<div class="checkout-container">
+
+    <div class="c-form">
+        <form action="" method="POST" class="form02" , enctype="multipart/form">
+            {% csrf_token %}
+
+            <h2 class="h02">Shipping Information : </h2>
+
+            <div class="no-border">
+                <label for="name">Name :</label>
+                <input type="text"value="{{user.first_name}} {{user.last_name}}" name="name" maxlength="50" required="" id="name" readonly>
+            </div>
+            
+            <div class="no-border">
+                <label for="email">Email :</label>
+                <input type="text" value="{{user.email}}" name="email" maxlength="50" required="" id="email" readonly>
+            </div>
+            
+            <div>
+                <label for="contact">Phone Number : </label>
+                <input type="text"  name="contact" maxlength="10" required id="contact"  placeholder="Enter the contact number which is available now.">
+            </div>
+
+            <div>
+                <h3>Shipping Address</h3>
+                <div>
+                    <label for="addr1">House/Block/Street Name & Number: </label>
+                    <input type="text" id="addr1" name="addr1" required>
+                </div>
+                <div>
+                    <label for="addr2">Village/Area: </label>
+                    <input type="text" id="addr2" name="addr2" required>
+                </div>
+
+                <div>
+                    <label for="addr3">City/District/Town: </label>
+                    <input type="text" id="addr3" name="addr3" required>
+                </div>
+                <div>
+                    <label for="addr4">State/Province: </label>
+                    <input type="text" id="addr4" name="addr4" required>
+                </div>
+                <div>
+                    <label for="addr5">Country: </label>
+                    <input type="text" id="addr5" name="addr5" required value="India" readonly>
+                    <label for="">Note: Delievery in India is only available now.</label>
+                </div>
+                <div>
+                    <label for="addr6">PIN Code: </label>
+                    <input type="text" maxlength="6" id="addr6" name="addr6" required>
+                </div>
+            </div>
+            <div>
+                <label for="billed_amount">Billed Amount: </label>
+                <input type="text" value="{{request.session.total_price}}.00" readonly id="billed_amount"
+                    name="billed_amount">INR.
+            </div>
+            <div>
+                <button class="btn01" type="submit">Proceed to Payment</button>
+            </div>
+
+        </form>
+
+    </div>
+
+    <div class="second-cls">
+        <aside>
+            <h2>Summary</h2>
+            <div>
+                <label for="total_items">Total Items: </label>
+                <input type="text" value="{{request.session.total_items_in_cart}}" readonly id="total_items" name="total_items">
+            </div>
+            
+            <div>
+                <label for="sub_total">Sub Total: </label>
+                <input type="text" value="&#8377; {{request.session.total_price}}.00" readonly id="sub_total" name="sub_total">
+            </div>
+            
+            <div>
+                <label for="shipping_charge">Shipping Charge: </label>
+                <input type="text" value="&#8377; 0.00" readonly id="shipping_charge" name="shipping_charge">
+            </div>
+            
+            <div>
+                <label for="taxes">Taxes: </label>
+                <input type="text" value="&#8377; 0.00" readonly id="taxes" name="taxes">
+            </div>
+            
+            <div>
+                <label for="billed_amount">Billed Amount: </label>
+                <input type="text" value="&#8377; {{request.session.total_price}}.00" readonly id="billed_amount" name="billed_amount">
+            </div>
+
+            <div>
+                <h3>Shipping & Delievery</h3>
+                <p>Orders are shipped during business days.</p>
+            </div>
+
+        </aside>
+    </div>
+
+
+
+
+
+
+</div>
+{% endblock %}
+
+{% block js %}
+    <!-- Add your inline javascript here  -->
+{% endblock%}
