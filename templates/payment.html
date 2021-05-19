@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}<link rel="stylesheet" href="{% static 'css/payment.css' %}"> {% endblock %}
+
+{% block title %}Payment{% endblock %}
+
+{% block main %}
+
+    <div class="pay-grid">
+        
+        <section id="left-09">
+            <h2>Choose a payment method : </h2>
+            <div class="flex-me">
+                <h3><a href="">PayPal</a></h3>
+                <h3><a href="">Paytm</a></h3>
+                <h3><a href="">PhonePe</a></h3>
+                <h3><a href="">GooglePay</a></h3>
+                <h3><a href="">UPI</a></h3>
+                <h3><a href="">Net Banking</a></h3>
+                <h3><a href="">Pay Now</a></h3>
+            </div>
+        </section>
+
+        <section id="right-09">
+            <h2>Payment Info</h2>
+            <div class="flex-me">
+                <h1>TO PAY</h1>
+                <h1>&#8377; {{request.session.billed_amount}}</h1>
+            </div>
+        </section>
+
+    </div>
+{% endblock %}

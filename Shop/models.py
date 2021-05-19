@@ -1,8 +1,8 @@
 from django.db import models
-import datetime
 from django.core.validators import MaxValueValidator
 from django.contrib.auth.models import User
 from decimal import Decimal
+import django.utils.timezone
 
 class Seller(models.Model):
 
@@ -184,7 +184,6 @@ class Order(models.Model):
     no_of_items = models.IntegerField(default=0)
     order_date = models.DateField(blank=True, null=True)
     shipping_date = models.DateField(blank=True, null=True)
-    shipping_address = models.TextField(max_length=250)
 
     is_complete = models.BooleanField(default=False)
     is_shipped = models.BooleanField(default=False)
@@ -207,3 +206,16 @@ class CartItem(models.Model):
 
     def __str__(self):
         return str(self.order)
+
+
+class OrderList(models.Model):
+    user = models.CharField(max_length=50)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    list_of_order = models.TextField(max_length=5000)
+    date_of_order = models.DateField(default=django.utils.timezone.now)
+    is_complete = models.BooleanField(default=False)
+    billed_amount = models.DecimalField(max_digits=20, decimal_places=2)
+    shipping_address = models.TextField(max_length=250)
+    phone = models.CharField(max_length=12)
+
+

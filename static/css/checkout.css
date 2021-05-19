@@ -1,38 +1,39 @@
-.checkout-container{
+.checkout-container {
   display: grid;
   grid-template-columns: 70% 25%;
-  grid-template-areas: 
-  'first second';
+  grid-template-areas: "first second";
 }
 
-
-.c-form{
-    grid-area: 'first';
-    display: flex;
-    flex-flow: column wrap;
-    justify-content:center;
-    align-items: center;
-    margin: 1em;
-    background-color: rgba(218, 218, 224, 1);
+.c-form {
+  grid-area: "first";
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 1em;
+  background-color: rgba(218, 218, 224, 1);
 }
 
-.c-form label, .c-form input, textarea{
-    margin: .5em;
-    padding: .5em;
-    font-size: .8em;
+.c-form label,
+.c-form input,
+textarea {
+  margin: 0.5em;
+  padding: 0.5em;
+  font-size: 0.8em;
 }
 
-.c-form label{
-    font-size: large;
+.c-form label {
+  font-size: large;
 }
 
-.no-border input{
-    border: none;
-    outline: none;
-    background-color: inherit;
+.no-border input {
+  border: none;
+  outline: none;
+  background-color: inherit;
+  font-size: 1em;
 }
 
-.btn01{
+.btn01 {
   margin: 0.9em 0.5em;
   padding: 0.4em 0.5em;
   font-size: 1em;
@@ -47,19 +48,24 @@
   background-color: rgba(7, 7, 204, 0.9);
 }
 
-.second-cls{
-   grid-area: 'second12';
-   display: flex;
-    flex-flow: column wrap;
-    justify-content:center;
-    align-items: center;
-    margin: 1em;
-    background-color: rgba(218, 218, 224, 0.925);
+.second-cls {
+  grid-area: "second12";
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 1em;
+  background-color: rgba(218, 218, 224, 0.925);
 }
 
-.second-cls input{
-    border: none;
-    background-color: inherit;
-    outline: none;
-    margin: .7em 2em;
+.second-cls input {
+  border: none;
+  background-color: inherit;
+  outline: none;
+  margin: 0.7em 2em;
+  font-size: 1.2em;
+}
+
+.second-cls aside{
+  margin: inherit;
 }

@@ -1,0 +1,42 @@
+.pay-grid{
+    display: grid;
+    grid-template-columns: 70% 28%;
+    grid-template-areas:
+    'area1 area2';
+}
+
+
+.flex-me{
+    margin: 1em;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+#left-09{
+    grid-area: 'area1';
+    margin: 1em;
+    color: white;
+    background-image: linear-gradient( 135deg, #69FF97 10%, #00E4FF 100%);
+}
+#right-09{
+    margin: 1em;
+    grid-area: 'area2';
+    color: white;
+    background-image: linear-gradient( 102.1deg, rgba(96,221,142,1) 8.7%, rgba(24,138,141,1) 88.1% );
+    background-image: linear-gradient(180deg, #2af598 0%, #009efd 100%);
+    height: 600px;
+}
+
+#right-09 h2, #left-09 h2{
+    text-align: center;
+    padding: 1em;
+    border-bottom: 1px solid #eee;
+
+}
+
+div h3, div h1{
+    padding: 1em;
+}
+

@@ -3,12 +3,13 @@ from django.http import JsonResponse
 from django.contrib import messages
 import datetime
 import json
+from django.core import serializers
 
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.forms import AuthenticationForm
 
-from .models import Seller, Customer, Product, Order, CartItem
+from .models import Seller, Customer, Product, Order, CartItem, OrderList
 from .forms import SignUpForm, ProfileEditForm, SellerSignUpForm, SellerProfileEditForm, ProductForm
 
 
@@ -367,9 +368,38 @@ def checkout(request):
         addr6 = request.POST.get('addr6')
         address = f'{addr1}, {addr2}, {addr3}, {addr6},\n {addr4}, {addr5}'
         billed_amount = request.POST.get('billed_amount')
+        request.session['billed_amount'] = billed_amount
         print(name, email, contact, address, billed_amount)
+
+        ordered_items = []
+        cart_items = CartItem.objects.filter(order=request.session.get('order'))
+        for item in cart_items.values():
+            print(item)
+            ordered_items.append(item)
+
+        # qs_json = serializers.serialize('json', cart_items)
+        # print(qs_json)
+
+        print(str(ordered_items))
+
+        order_list = OrderList(user=request.user, order=Order.objects.get(pk=request.session.get(
+            'order')), list_of_order=ordered_items, billed_amount=billed_amount, shipping_address=address, phone=contact)
+
+        order_list.save()
+        ordr = Order.objects.get(pk=request.session.get('order'))
+        ordr.order_date = datetime.datetime.now().date()
+        ordr.save()
+        cart_items.delete()
+        del request.session['total_items_in_cart']
+        del request.session['total_price']
+
+        return redirect('payment')
         
     return render(request, 'product/checkout.html')
+
+
+def payment(request):
+    return render(request, 'payment.html')
 
 
 # Test Page for Front End Developer

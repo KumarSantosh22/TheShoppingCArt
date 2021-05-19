@@ -33,6 +33,9 @@ urlpatterns = [
     path('cartitem', views.cartitem, name='cartitem'),
     path('checkout', views.checkout, name='checkout'),
 
+    # Payment
+    path('payment', views.payment, name='payment'),
+    
     # Others
     path("privacy",views.privacy,name="privacy"),
     path('test', views.test, name='test'),
