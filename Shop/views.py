@@ -12,6 +12,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from .models import Seller, Customer, Product, Order, CartItem, OrderList
 from .forms import SignUpForm, ProfileEditForm, SellerSignUpForm, SellerProfileEditForm, ProductForm
 
+from .sendmail import send_registration_mail, send_login_mail, send_checkout_mail, send_payment_confirmation
 
 def home(request):
     products = Product.objects.all()
@@ -69,6 +70,7 @@ def Login(request):
                 login(request, user)
                 request.session['username'] = username
                 print('*********USER DATA : ', user)
+                send_login_mail(request.user.first_name, request.user.email)
                 return redirect('home')
     else:
         form = AuthenticationForm()

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Shop',
+    'payments',
     'rest_framework',
 ]
 
@@ -139,4 +140,11 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'sk189436234@gmail.com'
-EMAIL_HOST_PASSWORD = os.environ.get('MY_PASS')
+EMAIL_HOST_PASSWORD = '7042124917'
+# EMAIL_HOST_PASSWORD = os.environ.get('MY_PASS')
+
+
+# Razorpay Credentials
+
+KEY_ID = 'rzp_test_ektkvAJyc7PCum'
+KEY_SECRET = 'TBSXmz8fkbK678kDT8rexaFX'
