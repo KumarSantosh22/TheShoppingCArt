@@ -19,11 +19,11 @@ def home(request):
     return render(request, 'index.html', {'products': products})
 
 
-def about(request):
+def aboutus(request):
     return render(request, 'about/about.html')
 
 
-def contact(request):
+def contactus(request):
     return render(request, 'about/contact.html')
 
 
@@ -292,12 +292,6 @@ def products_(accessories):
     pass
 
 
-# Footer Items
-
-def privacy(request):
-    return render(request, "policy/privacy.html")
-
-
 # Managing Cart
 
 def updateitem(request):
@@ -403,6 +397,36 @@ def payment(request):
     import num2word
     amt = num2word.word(int(float(request.session['billed_amount'])))
     return render(request, 'payment.html', {'amount_words':amt})
+
+
+# Footer Items
+
+def privacy(request):
+    return render(request, "policy/privacy.html")
+
+
+def payment_help(request):
+    return render(request, "policy/privacy.html")
+
+
+def ship_info(request):
+    return render(request, "policy/privacy.html")
+
+
+def return_help(request):
+    return render(request, "policy/privacy.html")
+
+
+def return_policy(request):
+    return render(request, "policy/privacy.html")
+
+
+def security(request):
+    return render(request, "policy/privacy.html")
+
+
+def tandc(request):
+    return render(request, "policy/privacy.html")
 
 
 # Test Page for Front End Developer

@@ -107,26 +107,26 @@
         
         <div class="footer">
             <a href="#">ABOUT</a>
-            <a href="#">About us</a>
-            <a href="#">Contact us</a>
-            <a href="#">Careers</a>
+            <a href="{% url 'aboutus' %}">About us</a>
+            <a href="{% url 'contactus' %}">Contact us</a>
+            <a href="{% url 'careers' %}">Careers</a>
             <a href="{% url 'seller' %}">Sell With Us</a>
         </div>
         
         <div class="footer">
             <a href="#">HELP</a>
-            <a href="#">Payments</a>
-            <a href="#">Shipping</a>
-            <a href="#">Cancellation and Returns</a>
+            <a href="{% url 'payment_help' %}">Payments</a>
+            <a href="{% url 'ship_info' %}">Shipping</a>
+            <a href="{% url 'return_help' %}">Cancellation and Returns</a>
             <a href="#">FAQ</a>
         </div>
         
         <div class="footer">
-            <a href="#">POLICY</a>
-            <a href="#">Return Policy</a>
-            <a href="#">Terms of Use</a>
-            <a href="#">Security</a>
-            <a href="privacy">Privacy</a>
+            <a href="">POLICY</a>
+            <a href="{% url 'return_policy' %}">Return Policy</a>
+            <a href="{% url 'tandc' %}">Terms of Use</a>
+            <a href="{% url 'security' %}">Security</a>
+            <a href="{% url 'privacy' %}">Privacy</a>
         </div>
         
         <div class="footer">
@@ -147,7 +147,8 @@
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.6.0.js"
-        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous">
+    </script>
 
     <script src="{% static 'script/msg.js' %}"></script>
 

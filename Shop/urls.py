@@ -2,11 +2,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-   path('', views.home, name='home'),
-    path('about', views.about, name='about'),
-    path('contact', views.contact, name='contact'),
-    path('careers', views.careers, name='careers'),
-    path('error', views.page_not_found, name='error'),
+    # Home urls
+    path('', views.home, name='home'),
 
     # Seller urls
     path('seller', views.seller, name='seller'),
@@ -38,5 +35,17 @@ urlpatterns = [
     
     # Others
     path("privacy",views.privacy,name="privacy"),
+    path('aboutus', views.aboutus, name='aboutus'),
+    path('contactus', views.contactus, name='contactus'),
+    path('careers', views.careers, name='careers'),
+    path('payment_help', views.payment_help, name='payment_help'),
+    path('ship_info', views.ship_info, name='ship_info'),
+    path('return_help', views.return_help, name='return_help'),
+    path('return_policy', views.return_policy, name='return_policy'),
+    path('tandc', views.tandc, name='tandc'),
+    path('security', views.security, name='security'),
+    path('error', views.page_not_found, name='error'),
+
+
     path('test', views.test, name='test'),
 ]

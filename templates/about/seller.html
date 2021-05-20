@@ -1,46 +1,31 @@
 {%extends 'base.html'%}
 {% load static %}
 
-{% block css %} <link rel="stylesheet" href="{% static 'css/seller.css' %}"> {% endblock %}
-<!-- Add your css link here  -->
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/common.css' %}"> {% endblock %}
 
-{% block title %}Seller |Sell on TheShoppingCArt{% endblock %}
-<!-- Add your title here -->>
+
+{% block title %}TheShoppingCArt{% endblock %}
+
 
 {% block main %}
 
-    <div class="container09">
-        <h2>
-            <strong>Namaste !</strong><p>If you want to sell with us. <em><a class="a02" href="{% url 'signupseller' %}">Join us now.</a></em></p>
-            <p>If you are already a Seller <a class="a02" href=""><em>Login into your account.</a></em></p>
-        </h2>
-        <article class="art01">
-            <h1>FAQ</h1>
-            <section class="sec02">
-                <h3>1. Why should you join us?</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa eligendi quibusdam dolor cupiditate earum explicabo iste, velit error voluptatum, suscipit facere rerum ipsam maxime omnis voluptates illo molestias laudantium. Esse?</p>
-            </section>
-            <section class="sec02">
-                <h3>2. Benifits and Perks</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa eligendi quibusdam dolor cupiditate earum explicabo iste, velit error voluptatum, suscipit facere rerum ipsam maxime omnis voluptates illo molestias laudantium.</p>
-            </section>
-            <section class="sec02">
-                <h3>3. Best E-Commerce Platform</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa eligendi quibusdam dolor cupiditate earum explicabo iste, velit error voluptatum, suscipit facere rerum ipsam maxime omnis voluptates illo molestias laudantium. Esse?</p>
-            </section>
-            <section class="sec02">
-                <h3>4. What our Existing Seller says ?</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa eligendi quibusdam dolor cupiditate earum explicabo iste, velit error voluptatum, suscipit facere rerum ipsam maxime omnis voluptates illo molestias laudantium. Esse?</p>
-            </section>
-            <section class="sec02">
-                <h3>5. Help Desk</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa eligendi quibusdam dolor cupiditate earum explicabo iste, velit error voluptatum, suscipit facere rerum ipsam maxime omnis voluptates illo molestias laudantium. Esse?</p>
-            </section>
-        </article>
-    </div>
+<div>
+    <section>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequuntur quam corrupti ad vel illum
+            incidunt, modi perferendis, magni reiciendis assumenda nobis unde sed voluptas alias autem ratione
+            aliquid ullam cupiditate.</p>
+    </section>
+    <section>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequuntur quam corrupti ad vel illum
+            incidunt, modi perferendis, magni reiciendis assumenda nobis unde sed voluptas alias autem ratione
+            aliquid ullam cupiditate.</p>
+    </section>
+    <section>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequuntur quam corrupti ad vel illum
+            incidunt, modi perferendis, magni reiciendis assumenda nobis unde sed voluptas alias autem ratione
+            aliquid ullam cupiditate.</p>
+    </section>
+</div>
 
 {% endblock %}
-
-{% block js %}
-<!-- Add your inline javascript here  -->
-{% endblock%}
