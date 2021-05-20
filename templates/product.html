@@ -23,7 +23,7 @@
             <p class="prod-font01">{{product.year}}</p>
             <p class="prod-font01">{{product.model}}</p>
             <p class="prod-font01">&#8377; {{product.price}}</p>
-            <p><button class="cart-btn"> Add to Cart</button></p>
+            <p><button data-product="{{product.pk}}" data-action="add" class="cart-btn update-cart"> Add to Cart</button></p>
         </div>
     </div>
 
@@ -40,7 +40,7 @@
                 <p class="prod-font">{{product.description|slice:":30"}}<strong> . . .</strong></p>
                 <p class="prod-font">&#8377; {{product.price}}</p>
                 <p class="prod-font"><a href="/product/{{product.pk}}">View Details<b> . . .</b></a>&nbsp;
-                    <button class="cart-btn"> Add to Cart</button>
+                    <button data-product="{{product.pk}}" data-action="add" class="cart-btn update-cart"> Add to Cart</button>
                 </p>
             </div>
             {% endfor %}
@@ -56,7 +56,3 @@
 
 
 {% endblock %}
-
-{% block js %}
-<!-- Add your inline javascript here  -->
-{% endblock%}
