@@ -371,7 +371,6 @@ def checkout(request):
         address = f'{addr1}, {addr2}, {addr3}, {addr6},\n {addr4}, {addr5}'
         billed_amount = request.POST.get('billed_amount')
         request.session['billed_amount'] = billed_amount
-        print(name, email, contact, address, billed_amount)
 
         ordered_items = []
         cart_items = CartItem.objects.filter(order=request.session.get('order'))
@@ -401,7 +400,9 @@ def checkout(request):
 
 
 def payment(request):
-    return render(request, 'payment.html')
+    import num2word
+    amt = num2word.word(int(float(request.session['billed_amount'])))
+    return render(request, 'payment.html', {'amount_words':amt})
 
 
 # Test Page for Front End Developer

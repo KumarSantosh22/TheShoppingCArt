@@ -12,10 +12,10 @@
         <section id="left-09">
             <h2>Choose a payment method : </h2>
             <div class="flex-me">
-                <h3><a href="">PayTm</a></h3>
-                <h3><a href="">PhonePe</a></h3>
-                <h3><a href="">GooglePay</a></h3>
-                <h3><a href="{% url 'razorpay' %}">RazorPay</a></h3>
+                <h3><a class="a-09" href="">PayTm</a></h3>
+                <h3><a class="a-09" href="">PhonePe</a></h3>
+                <h3><a class="a-09" href="">GooglePay</a></h3>
+                <h3><a class="a-09" href="{% url 'razorpay' %}">RazorPay</a></h3>
             </div>
         </section>
 
@@ -24,6 +24,7 @@
             <div class="flex-me">
                 <h1>TO PAY</h1>
                 <h1>&#8377; {{request.session.billed_amount}}</h1>
+                <h3><label for="">{{amount_words}} Rupees Only.</label></h3>
             </div>
         </section>
 
