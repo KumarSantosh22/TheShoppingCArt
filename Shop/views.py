@@ -406,27 +406,31 @@ def privacy(request):
 
 
 def payment_help(request):
-    return render(request, "policy/privacy.html")
+    return render(request, "help/payments.html")
 
 
 def ship_info(request):
-    return render(request, "policy/privacy.html")
+    return render(request, "help/ship_info.html")
 
 
 def return_help(request):
-    return render(request, "policy/privacy.html")
+    return render(request, "help/cancellation&returns.html")
 
 
 def return_policy(request):
-    return render(request, "policy/privacy.html")
+    return render(request, "policy/return_policy.html")
 
 
 def security(request):
-    return render(request, "policy/privacy.html")
+    return render(request, "policy/security.html")
 
 
 def tandc(request):
-    return render(request, "policy/privacy.html")
+    return render(request, "policy/terms&use.html")
+
+
+def faq(request):
+    return render(request, "help/faq.html")
 
 
 # Test Page for Front End Developer

@@ -42,6 +42,7 @@ urlpatterns = [
     path('ship_info', views.ship_info, name='ship_info'),
     path('return_help', views.return_help, name='return_help'),
     path('return_policy', views.return_policy, name='return_policy'),
+    path('faq', views.faq, name='faq'),
     path('tandc', views.tandc, name='tandc'),
     path('security', views.security, name='security'),
     path('error', views.page_not_found, name='error'),
