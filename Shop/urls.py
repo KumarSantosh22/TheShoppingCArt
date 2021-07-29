@@ -47,6 +47,9 @@ urlpatterns = [
     path('security', views.security, name='security'),
     path('error', views.page_not_found, name='error'),
 
+    # Track Order
+    path('trackorder', views.track_order, name='trackorder'),
+    path('shopping_archive', views.shopping_archive, name='shopping_archive'),
 
     path('test', views.test, name='test'),
 ]

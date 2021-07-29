@@ -14,6 +14,7 @@ from .forms import SignUpForm, ProfileEditForm, SellerSignUpForm, SellerProfileE
 
 from .sendmail import send_registration_mail, send_login_mail, send_checkout_mail, send_payment_confirmation
 
+
 def home(request):
     products = Product.objects.all()
     return render(request, 'index.html', {'products': products})
@@ -91,6 +92,7 @@ def profile(request):
         messages.info(request, 'Login to acess your profile.')
         return redirect('userlogin')
 
+
 def updateprofile(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
@@ -98,7 +100,7 @@ def updateprofile(request):
             fmd = ProfileEditForm(request.POST, request.FILES, instance=user)
             print(fmd.is_valid())
             if fmd.is_valid():
-                fmd.save()      
+                fmd.save()
                 for d in fmd.cleaned_data.values():
                     print(d)
                 image = fmd.cleaned_data['image']
@@ -111,8 +113,9 @@ def updateprofile(request):
                 permanent_address = fmd.cleaned_data['permanent_address']
                 delievery_address = fmd.cleaned_data['delievery_address']
 
-                User.objects.filter(username=request.user).update(first_name=first_name, last_name=last_name, email=email)
-                
+                User.objects.filter(username=request.user).update(
+                    first_name=first_name, last_name=last_name, email=email)
+
                 # Customer.objects.filter(user=request.user).update(image=image, phone=phone, residential_address=residential_address, permanent_address=permanent_address, delievery_address=delievery_address)
 
                 messages.success(request, 'Profile Successfully Updated!')
@@ -151,7 +154,8 @@ def signupseller(request):
             group = Group.objects.get(name='GroupSeller')
             gp.groups.add(group)
 
-            messages.success(request, 'You are now a member of TheShoppingCArt! Thank you! for chosing us.')
+            messages.success(
+                request, 'You are now a member of TheShoppingCArt! Thank you! for chosing us.')
 
             return redirect('home')
     else:
@@ -161,7 +165,7 @@ def signupseller(request):
 
 def sellerprofile(request):
     if request.user.is_authenticated:
-        if request.user.is_staff:              
+        if request.user.is_staff:
             user = User.objects.get(username=request.user)
             seller = Seller.objects.get(user=request.user)
             return render(request, 'seller_profile.html', {'user': user, 'seller': seller})
@@ -177,7 +181,8 @@ def updateseller(request):
         if request.user.is_staff:
             if request.method == 'POST':
                 user = Seller.objects.get(user=request.user)
-                fmd = SellerProfileEditForm(request.POST, request.FILES, instance=user)
+                fmd = SellerProfileEditForm(
+                    request.POST, request.FILES, instance=user)
                 print(fmd.is_valid())
                 if fmd.is_valid():
                     fmd.save()
@@ -190,7 +195,6 @@ def updateseller(request):
 
                     User.objects.filter(username=request.user).update(
                         first_name=first_name, last_name=last_name, email=email)
-
 
                     messages.success(request, 'Profile Successfully Updated!')
                     return redirect('sellerprofile')
@@ -217,12 +221,13 @@ def addproduct(request):
         if request.method == 'POST':
             form = ProductForm(request.POST, request.FILES)
             if form.is_valid():
-                Product.objects.create(seller=request.user, image=form.cleaned_data['image'],name=form.cleaned_data['name'],brand=form.cleaned_data['brand'],model=form.cleaned_data['model'],year=form.cleaned_data['year'],description=form.cleaned_data['description'],price=form.cleaned_data['price'],in_stock=form.cleaned_data['in_stock'],stock_qty=form.cleaned_data['stock_qty'],reorder_qty=form.cleaned_data['reorder_qty'],is_discount=form.cleaned_data['is_discount'],discount=form.cleaned_data['discount'],category=form.cleaned_data['category'],subcategory=form.cleaned_data['subcategory'],season=form.cleaned_data['season'],type_choice=form.cleaned_data['type_choice'],exp_date=form.cleaned_data['exp_date'], rating=form.cleaned_data['rating'])
+                Product.objects.create(seller=request.user, image=form.cleaned_data['image'], name=form.cleaned_data['name'], brand=form.cleaned_data['brand'], model=form.cleaned_data['model'], year=form.cleaned_data['year'], description=form.cleaned_data['description'], price=form.cleaned_data['price'], in_stock=form.cleaned_data['in_stock'], stock_qty=form.cleaned_data['stock_qty'],
+                                       reorder_qty=form.cleaned_data['reorder_qty'], is_discount=form.cleaned_data['is_discount'], discount=form.cleaned_data['discount'], category=form.cleaned_data['category'], subcategory=form.cleaned_data['subcategory'], season=form.cleaned_data['season'], type_choice=form.cleaned_data['type_choice'], exp_date=form.cleaned_data['exp_date'], rating=form.cleaned_data['rating'])
                 for f in form.cleaned_data.values():
                     print(f)
                 messages.success(request, 'Product added successfully.')
         form = ProductForm()
-        return render(request, 'product/add_products.html', {'form':form})
+        return render(request, 'product/add_products.html', {'form': form})
 
 
 # PRODUCT MANAGEMENT FOR EACH CATEGORY
@@ -230,7 +235,7 @@ def addproduct(request):
 def product(request, id):
     # This function is for view details of product
     product = Product.objects.get(pk=id)
-    return render(request, 'product.html', {'product':product})
+    return render(request, 'product.html', {'product': product})
 
 
 def delproduct(request, id):
@@ -250,8 +255,7 @@ def updateproduct(request, id):
             form.save()
             messages.success(request, 'Updated Successfully')
             return redirect('dashboard')
-    return render(request, 'product/update_product.html', {'form':form})
-
+    return render(request, 'product/update_product.html', {'form': form})
 
 
 # Different Product Pages
@@ -306,8 +310,9 @@ def updateitem(request):
 
     print(json_data)
     order, created = Order.objects.get_or_create(customer=customer)
-    request.session['order']=order.pk
-    orderItem, created = CartItem.objects.get_or_create(order=order, product=product)
+    request.session['order'] = order.pk
+    orderItem, created = CartItem.objects.get_or_create(
+        order=order, product=product)
 
     if action == 'add':
         if orderItem.quantity:
@@ -348,7 +353,7 @@ def cartitem(request):
     request.session['total_items_in_cart'] = total_qty
     request.session['total_price'] = int(invoice)
 
-    return render(request, 'cart.html', {'cart': cart, 'invoice':invoice, 'total_qty':total_qty})
+    return render(request, 'cart.html', {'cart': cart, 'invoice': invoice, 'total_qty': total_qty})
 
 
 def checkout(request):
@@ -367,7 +372,8 @@ def checkout(request):
         request.session['billed_amount'] = billed_amount
 
         ordered_items = []
-        cart_items = CartItem.objects.filter(order=request.session.get('order'))
+        cart_items = CartItem.objects.filter(
+            order=request.session.get('order'))
         for item in cart_items.values():
             print(item)
             ordered_items.append(item)
@@ -389,14 +395,14 @@ def checkout(request):
         del request.session['total_price']
 
         return redirect('payment')
-        
+
     return render(request, 'product/checkout.html')
 
 
 def payment(request):
     import num2word
     amt = num2word.word(int(float(request.session['billed_amount'])))
-    return render(request, 'payment.html', {'amount_words':amt})
+    return render(request, 'payment.html', {'amount_words': amt})
 
 
 # Footer Items
@@ -443,3 +449,39 @@ def test(request):
         cust = Customer.objects.get(user=request.user)
         form = ProfileEditForm()
     return render(request, 'test.html', {'form': form, 'user': user, 'cust': cust})
+
+
+# Order Tracking and Archives
+
+def track_order(request):
+    cust = Customer.objects.get(user=request.user)
+    ordr = Order.objects.filter(customer=cust, is_complete=False)
+    track_info = {}
+    if ordr:
+        # print('\n',ordr.values(),"\n")
+        for val in ordr.values():
+            track_info['order_id'] = val['orderid']
+            track_info['shipped'] = val['is_shipped']
+            track_info['delivered'] = val['is_delivered']
+            track_info['complete'] = val['is_complete']
+            track_info['transaction_id'] = val['transaction_id']
+            track_info['customer_id'] = val['customer_id']
+            track_info['invoice'] = val['invoice']
+            track_info['no_of_items'] = val['no_of_items']
+            track_info['order_date'] = val['order_date']
+            track_info['shipping_date'] = val['shipping_date']
+            track_info['deliever_date'] = val['deliever_date']
+            track_info['status'] = val['status']
+
+        print(track_info, '\n')
+
+        if not track_info['complete']:
+            return render(request, 'track/trackorder.html', {'track_info':track_info})
+    else:
+        return render(request, 'track/trackorder.html', {'no_track': True})
+
+
+def shopping_archive(request):
+    return render(request, 'track/prev_ordered_items.html')
+
+

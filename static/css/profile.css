@@ -86,3 +86,7 @@
   align-items: center;
   flex-flow: column wrap;
 }
+
+.black-anchor{
+  color: black;
+}

@@ -1,0 +1,90 @@
+{%extends 'base.html'%}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/track.css' %}"> {% endblock %}
+<!-- Add your css link here  -->
+
+{% block title %}Track Order{% endblock %}
+<!-- Add your title here -->
+
+{% block main %}
+
+<div class="track-main">
+    {% if no_track %}
+
+    <div class="no-order">
+        <h2>You have no order to track.</h2>
+    </div>
+
+    {% else %}
+    <!-- main tracking components here -->
+
+    <div class="container-track">
+        <h2>Order ID : {{track_info.order_id}}</h2>
+        <div id="t-info">
+            <div>
+                <label for="tid">Transatction ID:</label>
+                <input type="text" id="tid" readonly value="{{track_info.transaction_id}}">
+            </div>
+            <div>
+                <label for="ordr">Order Date</label>
+                <input type="text" id="ordr" readonly value="{{track_info.order_date}}">
+                <label for="shd">Shipping Date</label>
+                <input type="text" id="shd" readonly value="{{track_info.shipping_date}}">
+                <label for="ddate">Delivery Date</label>
+                <input type="text" id="date" readonly value="{{track_info.deliever_date}}">
+            </div>
+            <div>
+                <label for="inv">Invoice</label>
+                <input type="text" id="inv" readonly value="{{track_info.invoice}}">
+                <label for="nitems">Total Items Purchased</label>
+                <input type="text" id="nitems" readonly value="{{track_info.no_of_items}}">
+                <label for="stat">Status</label>
+                <input type="text" id="stat" readonly value="{{track_info.status}}">
+            </div>
+        </div>
+        <div id="progress">
+            <ul class="progressbar">
+                <li class="active">
+                    <img src="{% static 'accepted.png' %}" alt=""><br>
+                    <i class="fa fastyle fa-check"></i>
+                    <i class="line"></i>
+                    <p>Accepted</p>
+                </li>
+                <li>
+                    <img src="{% static 'packed.png' %}" alt=""><br>
+                    <i class="fa fastyle fa-check"></i>
+                    <i class="line"></i>
+                    <p>Packed</p>
+                </li>
+                <li>
+                    <img src="{% static 'shipped.png' %}" alt=""><br>
+                    <i class="fa fastyle fa-refresh"></i>
+                    <i class="line"></i>
+                    <p>Shipped</p>
+                </li>
+                <li>
+                    <img src="{% static 'delivered.png' %}" alt=""><br>
+                    <i class="fa fastyle fa-times"></i>
+                    <i class="line"></i>
+                    <p>Delivered</p>
+                </li>
+                <li>
+                    <img src="{% static 'completed.png' %}" alt=""><br>
+                    <i class="fa fastyle fa-times"></i>
+                    <i class="line"></i>
+                    <p>Completed</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    {% endif %}
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'script/cart.js' %}"></script>
+{% endblock %}

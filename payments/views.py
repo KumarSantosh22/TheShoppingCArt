@@ -64,7 +64,7 @@ def razorpay_handler(request):
                 print("Payment Successfully Received")
                 messages.success(request, 'Payment Successfully Received')
                 
-                ordr = Ordere.objects.get(pk=order)
+                ordr = Order.objects.get(pk=order)
                 ordr.transaction_id = razorpay_payment_id
                 ordr.save()
 

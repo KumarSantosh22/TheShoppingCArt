@@ -23,7 +23,7 @@
 
         <section id="section01">
             <div>
-                <h3>Personal Information &nbsp;<a class="up01" href="{% url 'updateprofile' %}">Update</a></h3>
+                <h3><i class="fa fa-info-circle" aria-hidden="true"></i>Personal Information &nbsp;<a class="up01" href="{% url 'updateprofile' %}">Update</a></h3>
                 <input type="text" readonly value="{{user.first_name}}">
                 <input type="text" readonly value="{{user.last_name}}">
             </div>
@@ -53,6 +53,19 @@
                     <label for="">Delievery Address</label>
                     <input type="text" readonly value="{{cust.delievery_address}}">
                 </p>
+            </div>
+            <div>
+                <h3>
+                    <a class="black-anchor" href="{% url 'trackorder' %}">Track Your Order</a>
+                    <i class="fa fa-truck" aria-hidden="true"></i>
+                </h3>
+            </div>
+            <div>
+                <h3>
+                    <a class="black-anchor" href="{% url 'shopping_archive' %}">Shoppings Archive</a>
+                    <i class="fa fa-archive" aria-hidden="true"></i>
+                    
+                </h3>
             </div>
             <div>
                 <h5>Warning! Danger Zone</h5>
