@@ -47,6 +47,7 @@ def signup(request):
             form.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
+            to_mail = form.cleaned_data.get('email')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
 
@@ -54,6 +55,8 @@ def signup(request):
             print('*********USER DATA : ', user)
             customer = Customer(user=user)
             customer.save()
+            print(to_mail)
+            send_registration_mail(username, to_mail)
             return redirect('home')
     else:
         form = SignUpForm()
@@ -143,6 +146,7 @@ def signupseller(request):
             gp = form.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
+            to_mail = form.cleaned_data.get('email')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
 
@@ -156,6 +160,7 @@ def signupseller(request):
 
             messages.success(
                 request, 'You are now a member of TheShoppingCArt! Thank you! for chosing us.')
+            send_registration_mail(username, to_mail)
 
             return redirect('home')
     else:
