@@ -5,8 +5,8 @@ from django.core.mail import send_mail
 from django.template.loader import render_to_string
 
 
-api_key = '1da83d34609b145a8d777dfe2cc30b42'
-api_secret = 'bcf9a367759afb944afb96aca78c086b'
+api_key = ''
+api_secret = ''
 
 
 def send_registration_mail(user_name, to_mail):
