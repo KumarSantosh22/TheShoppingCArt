@@ -91,3 +91,11 @@ ul li:first-child .line:after{
 ul li:last-child .line:after{
     width: 128px;
 }
+
+.mrgin{
+  margin: 2em;
+}
+
+.t-info{
+  border: 2px solid grey;;
+}

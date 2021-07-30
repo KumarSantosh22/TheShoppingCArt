@@ -261,39 +261,52 @@ def updateproduct(request, id):
 # Different Product Pages
 
 def products_electronics(request):
-    return HttpResponse("")
+    products = Product.objects.filter(category='Electronics')
+    return render(request, 'different_prods.html', {'products': products, 'category':'Electronics'})
 
 
 def product_tv_appliances(request):
-    pass
+    products = Product.objects.filter(category='TV & Appliances')
+    return render(request, 'different_prods.html', {'products': products, 'category': 'TV & Appliances'})
 
 
 def products_men(request):
-    pass
+    products = Product.objects.filter(category='Men')
+    return render(request, 'different_prods.html', {'products': products, 'category': 'Men\'s Wear'})
 
 
 def products_women(request):
-    pass
+    products = Product.objects.filter(category='Women')
+    return render(request, 'different_prods.html', {'products': products, 'category':'Women\'s Wear' })
 
 
 def products_kids(request):
-    pass
+    products = Product.objects.filter(category='Baby & Kids')
+    return render(request, 'different_prods.html', {'products': products, 'category':'Kids Wear'})
+
 
 
 def products_pc(request):
-    pass
+    products = Product.objects.filter(category='Computers')
+    return render(request, 'different_prods.html', {'products': products, 'category': 'Computers'})
+
 
 
 def products_phones(request):
-    pass
+    products = Product.objects.filter(category='Phones & Tablets')
+    return render(request, 'different_prods.html', {'products': products, 'category': 'Phones and Tablets'})
+
 
 
 def products_books(request):
-    pass
+    products = Product.objects.filter(category='Books')
+    return render(request, 'different_prods.html', {'products': products, 'category':'Books'})
 
 
-def products_(accessories):
-    pass
+
+def products_accessories(request):
+    products = Product.objects.filter(category='Accessories')
+    return render(request, 'different_prods.html', {'products': products, 'category':'Accessories'})
 
 
 # Managing Cart
@@ -439,18 +452,6 @@ def faq(request):
     return render(request, "help/faq.html")
 
 
-# Test Page for Front End Developer
-
-def test(request):
-    if request.method == 'POST':
-        form = ProfileEditForm(request.POST, request.FILES)
-    else:
-        user = User.objects.get(username=request.user)
-        cust = Customer.objects.get(user=request.user)
-        form = ProfileEditForm()
-    return render(request, 'test.html', {'form': form, 'user': user, 'cust': cust})
-
-
 # Order Tracking and Archives
 
 def track_order(request):
@@ -482,6 +483,78 @@ def track_order(request):
 
 
 def shopping_archive(request):
-    return render(request, 'track/prev_ordered_items.html')
+
+    cust = Customer.objects.get(user=request.user)
+    ordr = Order.objects.filter(customer=cust, is_complete=False)
+    track_info = {}
+    if ordr:
+        # print('\n',ordr.values(),"\n")
+        for val in ordr.values():
+            track_info['order_id'] = val['orderid']
+            track_info['shipped'] = val['is_shipped']
+            track_info['delivered'] = val['is_delivered']
+            track_info['complete'] = val['is_complete']
+            track_info['transaction_id'] = val['transaction_id']
+            track_info['customer_id'] = val['customer_id']
+            track_info['invoice'] = val['invoice']
+            track_info['no_of_items'] = val['no_of_items']
+            track_info['order_date'] = val['order_date']
+            track_info['shipping_date'] = val['shipping_date']
+            track_info['deliever_date'] = val['deliever_date']
+            track_info['status'] = val['status']
+
+        print('\n',track_info, '\n')
+
+        if not track_info['complete']:
+            return render(request, 'track/prev_ordered_items.html', {'track_info': track_info})
+    else:
+        return render(request, 'track/prev_ordered_items.html', {'no_track': True})
 
 
+# Searching
+def searchMatch(query, item):
+    '''return true only if query matches the item'''
+    if query in item.description.lower() or query in item.name.lower() or query in item.category.lower():
+        return True
+    else:
+        return False
+
+
+def search(request):
+    import math
+    query = request.GET.get('query')
+    print('I am query : ',query)
+    allProds = []
+    catprods = Product.objects.values(
+        'category', 'brand', 'description', 'name', 'model', 'subcategory')
+    cats = {item['category'] for item in catprods}
+    for cat in cats:
+        prodtemp = Product.objects.filter(category=cat)
+        if prodtemp is not None:
+            prod = [item for item in prodtemp if searchMatch(query, item)]
+
+            n = len(prod)
+            nSlides = n // 4 + math.ceil((n / 4) - (n // 4))
+            if len(prod) != 0:
+                allProds.append([prod, range(1, nSlides), nSlides])
+            
+    if len(allProds) == 0 or len(query) < 4:
+        return render(request, 'search_results.html')
+
+    return render(request, 'search_results.html', {'allProds': allProds})
+    
+
+# Test Page for Front End Developer
+
+def test(request):
+    if request.method == 'POST':
+        form = ProfileEditForm(request.POST, request.FILES)
+    else:
+        user = User.objects.get(username=request.user)
+        cust = Customer.objects.get(user=request.user)
+        form = ProfileEditForm()
+    return render(request, 'test.html', {'form': form, 'user': user, 'cust': cust})
+
+
+def adminpanel(request):
+    return redirect(request, 'admin')

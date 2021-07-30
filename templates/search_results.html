@@ -58,9 +58,11 @@
 <!-- ****************PRODUCTS**************** -->
 <div class="container">
 
-    <h2>New Arrivals</h2>
+    {% if allProds %}
+    <h2>Search Results</h2>
     <div class="items">
-
+        {% for products, range, nSlides in allProds %}
+        
         {% for product in products %}
         <div class="item">
             <p><img height="150px" width="150" src="{{product.image.url}}" alt="product"></p>
@@ -69,9 +71,11 @@
             <p class="prod-font">{{product.description|slice:":30"}}<strong> . . .</strong></p>
             <p class="prod-font">&#8377; {{product.price}}</p>
             <p class="prod-font"><a href="/product/{{product.pk}}">View Details<b> . . .</b></a>&nbsp;
-                <button data-product="{{product.pk}}" data-action="add" class="cart-btn update-cart"> Add to Cart</button>
+                <button data-product="{{product.pk}}" data-action="add" class="cart-btn update-cart"> Add to
+                    Cart</button>
             </p>
         </div>
+        {% endfor %}
         {% endfor %}
 
         <div>
@@ -81,62 +85,15 @@
         </div>
     </div>
 
-</div>
-
-
-<div class="container">
-
-    <h2>Trending</h2>
-    <div class="items">
-    
-        {% for product in products %}
-        <div class="item">
-            <p><img height="150px" width="150" src="{{product.image.url}}" alt="product"></p>
-            <p class="prod-font">{{product.name}}</p>
-            <p class="prod-font">{{product.subcategory}}</p>
-            <p class="prod-font">{{product.description|slice:":30"}}<strong> . . .</strong></p>
-            <p class="prod-font">&#8377; {{product.price}}</p>
-            <p class="prod-font"><a href="/product/{{product.pk}}">View Details<b> . . .</b></a>&nbsp;
-                <button data-product="{{product.pk}}" data-action="add" class="cart-btn update-cart"> Add to Cart</button>
-            </p>
-        </div>
-        {% endfor %}
-    
-        <div>
-            <p>
-                <button class="load-more-btn">Load more...</button>
-            </p>
-        </div>
+    {% else %}
+    <div>
+        <p>No search results found...</p>
+        <p>For better results please use relevent keywords instead a paraphrase.</p>
     </div>
+    {% endif %}
 
 </div>
 
-<div class="container">
-
-    <h2>Party Wear</h2>
-    <div class="items">
-
-        {% for product in products %}
-        <div class="item">
-            <p><img height="150px" width="150" src="{{product.image.url}}" alt="product"></p>
-            <p class="prod-font">{{product.name}}</p>
-            <p class="prod-font">{{product.subcategory}}</p>
-            <p class="prod-font">{{product.description|slice:":30"}}<strong> . . .</strong></p>
-            <p class="prod-font">&#8377; {{product.price}}</p>
-            <p class="prod-font"><a href="/product/{{product.pk}}">View Details<b> . . .</b></a>&nbsp;
-                <button data-product="{{product.pk}}" data-action="add" class="cart-btn update-cart"> Add to Cart</button>
-            </p>
-        </div>
-        {% endfor %}
-
-        <div>
-            <p>
-                <button class="load-more-btn">Load more...</button>
-            </p>
-        </div>
-    </div>
-
-</div>
 
 {% endblock %}
 

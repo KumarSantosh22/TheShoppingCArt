@@ -2,55 +2,58 @@
 {% load static %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'css/cart.css' %}"> {% endblock %}
+<link rel="stylesheet" href="{% static 'css/track_prev.css' %}"> {% endblock %}
 <!-- Add your css link here  -->
 
-{% block title %}CArt{% endblock %}
+{% block title %}Track Order{% endblock %}
 <!-- Add your title here -->
 
 {% block main %}
 
-<div class="c-head">
-    <h2>Cart Items</h2>
-    <p>Total Quantity: {{total_qty}} &emsp; Total Price: &#8377;{{invoice}}</p>
-</div>
+<div class="track-main">
+    {% if no_track %}
 
-<div class="cart">
-    <table>
-        <thead>
-            <tr>
-                <th>&emsp;Item&emsp;</th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Total</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in cart %}
-            <tr>
-                <td><img height="100px" width="100px" src="{{ item.product.image.url}}" alt="IMG"></td>
-                <td>{{item.product.name}}</td>
-                <td>{{item.product.price}}</td>
-                <td>
-                    {% if item %}
-                    <button data-product="{{item.product.pk}}" data-action="remove"
-                        class="cart-btn update-cart">-</button>
-                    {{item.quantity}}&ensp;
-                    <button data-product="{{item.product.pk}}" data-action="add" class="cart-btn 
-                        update-cart">+</button>
-                    {% endif %}
-                </td>
-                <td>{{item.total}}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
-    <div id="btn09">
-        <a href="{% url 'checkout' %}">Checkout</a>
+    <div class="no-order">
+        <h2>You have no order to track.</h2>
     </div>
 
+    {% else %}
+    <!-- main tracking components here -->
+
+    <div class="container-track">
+        <h2>Your Previous Shopping's : </h2>
+        <div id="t-info">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Transatction ID</th>
+                        <th>Order Date</th>
+                        <th>Shipping Date</th>
+                        <th>Delivery Date</th>
+                        <th>Invoice</th>
+                        <th>Total Items Purchased</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{track_info.order_id}}</td>
+                        <td>{{track_info.transaction_id}}</td>
+                        <td>{{track_info.order_date}}</td>
+                        <td>{{track_info.shipping_date}}</td>
+                        <td>{{track_info.deliever_date}}</td>
+                        <td>{{track_info.invoice}}</td>
+                        <td>{{track_info.no_of_items}}</td>
+                        <td>{{track_info.status}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+
+    {% endif %}
 </div>
 
 {% endblock %}

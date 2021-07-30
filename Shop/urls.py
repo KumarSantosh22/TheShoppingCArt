@@ -32,9 +32,9 @@ urlpatterns = [
 
     # Payment
     path('payment', views.payment, name='payment'),
-    
+
     # Others
-    path("privacy",views.privacy,name="privacy"),
+    path("privacy", views.privacy, name="privacy"),
     path('aboutus', views.aboutus, name='aboutus'),
     path('contactus', views.contactus, name='contactus'),
     path('careers', views.careers, name='careers'),
@@ -51,5 +51,24 @@ urlpatterns = [
     path('trackorder', views.track_order, name='trackorder'),
     path('shopping_archive', views.shopping_archive, name='shopping_archive'),
 
+    # Products by Categories
+    path('products_electronics', views.products_electronics,
+         name='products_electronics'),
+    path('product_tv_appliances', views.product_tv_appliances,
+         name='product_tv_appliances'),
+    path('products_men', views.products_men, name='products_men'),
+    path('products_women', views.products_women, name='products_women'),
+    path('products_kids', views.products_kids, name='products_kids'),
+    path('products_pc', views.products_pc, name='products_pc'),
+    path('products_phones', views.products_phones, name='products_phones'),
+    path('products_books', views.products_books, name='products_books'),
+    path('products_accessories', views.products_accessories,
+         name='products_accessories'),
+
+    # Test Page
     path('test', views.test, name='test'),
+    
+    # functions
+    path('admin', views.adminpanel, name='adminpanel'),
+    path('search', views.search, name='search'),
 ]
