@@ -37,15 +37,14 @@
     </div>
 
     <div class="slides-container">
-
-        <div class="slide-image">
-            <img src="../static/img_carousal_1.jpg" alt="">
-        </div>
         <div class="slide-image">
             <img src="../static/img_carousal_2.jpg" alt="">
         </div>
         <div class="slide-image">
             <img src="../static/img_carousal_3.jpg" alt="">
+        </div>
+        <div class="slide-image">
+            <img src="../static/img_carousal_1.jpg" alt="">
         </div>
         <div class="slide-image">
             <img src="../static/img_carousal_4.jpg" alt="">
@@ -82,7 +81,7 @@
 
         <div>
             <p>
-                <button class="load-more-btn">Load more...</button>
+                <!-- <button class="load-more-btn">Load more...</button> -->
             </p>
         </div>
     </div>
@@ -95,7 +94,7 @@
     <h2>Trending</h2>
     <div class="items">
     
-        {% for product in products %}
+        {% for product in trending %}
         <div class="item">
             <p><img height="150px" width="150" src="{{product.image.url}}" alt="product"></p>
             <p class="prod-font">{{product.name}}</p>
@@ -108,11 +107,6 @@
         </div>
         {% endfor %}
     
-        <div>
-            <p>
-                <button class="load-more-btn">Load more...</button>
-            </p>
-        </div>
     </div>
 
 </div>
@@ -122,7 +116,7 @@
     <h2>Party Wear</h2>
     <div class="items">
 
-        {% for product in products %}
+        {% for product in party %}
         <div class="item">
             <p><img height="150px" width="150" src="{{product.image.url}}" alt="product"></p>
             <p class="prod-font">{{product.name}}</p>
@@ -135,11 +129,6 @@
         </div>
         {% endfor %}
 
-        <div>
-            <p>
-                <button class="load-more-btn">Load more...</button>
-            </p>
-        </div>
     </div>
 
 </div>

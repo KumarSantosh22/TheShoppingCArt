@@ -17,7 +17,13 @@ from .sendmail import send_registration_mail, send_login_mail, send_checkout_mai
 
 def home(request):
     products = Product.objects.all()
-    return render(request, 'index.html', {'products': products})
+    new = Product.objects.filter(type_choice='New')
+    trending = Product.objects.filter(type_choice='Trending')
+    sales = Product.objects.filter(type_choice='Sales')
+    regular = Product.objects.filter(type_choice='Regular')
+    party = Product.objects.filter(type_choice='Party')
+    ethnic = Product.objects.filter(type_choice='Ethnic')
+    return render(request, 'index.html', {'products': products, 'party': party, 'trending': trending, 'sales': sales, 'new':new, 'regular':regular, 'ethnic':ethnic})
 
 
 def aboutus(request):
