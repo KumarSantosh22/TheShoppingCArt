@@ -1,3 +1,5 @@
+console.log("This is slider");
+
 var current = 0;
 var slides = document.getElementsByClassName("slide-image");
 var n = slides.length;
@@ -26,8 +28,9 @@ function sliding(val) {
   display();
 }
 function automateSliding() {
+  console.log("This is slider");
   sliding(1);
 }
 displayNone();
 display();
-setInterval(automateSliding, 4000);
+setInterval(automateSliding, 2000);
