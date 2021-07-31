@@ -1,0 +1,19 @@
+.track-main {
+  margin: 0.5em 1em;
+  padding: 0.2em;
+  display: flex;
+  flex-flow: row wrap;
+  height: 65vh;
+}
+
+table{
+    margin: 1em;
+}
+
+th, td{
+    padding: 1em;
+}
+
+tr, th, td{
+    border: 1px solid gray;
+}

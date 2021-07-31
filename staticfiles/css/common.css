@@ -1,0 +1,32 @@
+.flex-me{
+    margin: 1rem;
+    padding: 1rem;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2em;
+}
+
+.bg-grad{
+    background: linear-gradient(to right, rgb(245, 142, 142), rgb(135, 236, 135), rgb(86, 142, 247));
+}
+
+.btn{
+    margin: .5rem;
+    padding: .5rem;
+    color: #eee;
+    background-color: #1b1bfc;
+    border-radius: .5rem;
+    border: none;
+    outline: none;
+}
+
+.mar{
+    margin: 1rem 0rem;
+}
+
+.pad{
+    padding: .5rem;
+}
+

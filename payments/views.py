@@ -51,8 +51,9 @@ def razorpay_handler(request):
         data = request.POST
         try:
             if data['error[code]']:
-                html = f'<h1>Sorry! Payment is failed. Following are the details : </h1> {json.dumps(data)}'
-                return HttpResponse(html)
+                datas = json.dumps(data)
+                msg = f'Sorry! Payment is failed. Following are the details : \n {data}'
+                return render(request, 'transaction_success.html', {'msg': msg})
         except:      
             verify_sign = razorpay_client.utility.verify_payment_signature(data)
             if verify_sign is None:
@@ -71,7 +72,8 @@ def razorpay_handler(request):
                 tranz = Transaction(user=user_name, order_id=razorpay_order_id, payment_id=razorpay_payment_id, email=user_email, sign=razorpay_signature)
                 tranz.save()
                 html = f'<h1>Hurray! Payment is successful. Following are the details : </h1> {json.dumps(data)}'
-            return HttpResponse(html)
+
+            return render(request, 'transaction_success.html', {'data':data})
 
 def testpay(request):
     set_global(request)

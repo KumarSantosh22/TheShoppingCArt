@@ -1,0 +1,55 @@
+{%extends 'base.html'%}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/track_prev.css' %}"> {% endblock %}
+<!-- Add your css link here  -->
+
+{% block title %}Track Order{% endblock %}
+<!-- Add your title here -->
+
+{% block main %}
+
+<div class="track-main">
+    {% if msg %}
+    <div class="no-order">
+        <h2>{{msg}}</h2>
+        {% for info in data %}
+        <h3>{{info}}</h3>
+        {% endfor %}
+    </div>
+
+    {% else %}
+    <!-- main tracking components here -->
+
+    <div class="container-track">
+        <h2>Your Payment Information : </h2>
+        <div id="t-info">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Payment ID</th>
+                        <th>Order ID</th>
+                        <th>Signature</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{data.razorpay_payment_id}}</td>
+                        <td>{{data.razorpay_order_id}}</td>
+                        <td>{{data.razorpay_signature}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'script/cart.js' %}"></script>
+{% endblock %}

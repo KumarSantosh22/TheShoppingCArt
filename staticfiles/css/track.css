@@ -1,0 +1,101 @@
+.track-main {
+  margin: 0.5em 1em;
+  padding: 0.2em;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  height: 65vh;
+}
+
+.progressbar {
+  display: inline-flex;
+  margin: 50px;
+}
+
+.progressbar img {
+  width: 80px;
+}
+
+.progressbar ul,
+.progressbar li,
+.progressbar p {
+  font-family: sans-serif;
+  color: #01ab97;
+  text-align: center;
+}
+
+.progressbar ul li {
+  width: 200px;
+  margin: 100px auto;
+  position: relative;
+}
+
+.progressbar img,
+.progressbar i,
+.progressbar p {
+  margin: 20px 80px;
+}
+
+.progressbar i {
+  border: 1.5px solid rgb(207, 205, 205);
+  border-radius: 50%;
+}
+
+.fastyle {
+  background: #ccc;
+  width: 32px;
+  height: 30px;
+  color: #fff;
+  border-radius: 50%;
+  padding: 5px;
+  position: relative;
+  left:25px;
+}
+
+.line::after {
+  content: "";
+  background: #ccc;
+  height: 5px;
+  width: 280px;
+  display: block;
+  position: relative; 
+  left: -20px;
+  top: -35px;
+  z-index: -1;
+}
+
+ul li:nth-child(3) .fastyle{
+    background:green;
+}
+ul li:nth-child(3) .line::after{
+    background:green;
+}
+
+ul li:nth-child(1) .fastyle,
+ul li:nth-child(2) .fastyle{
+    background: #60aa97;
+}
+
+ul li:nth-child(1) .line::after,
+ul li:nth-child(2) .line::after{
+    background: #60aa97;;
+}
+
+ul li:first-child .line:after{
+    width: 128px;
+    left: 128px;
+}
+
+ul li:last-child .line:after{
+    width: 128px;
+}
+
+.mrgin{
+  margin: 2em;
+}
+
+.t-info{
+  border: 2px solid grey;;
+}
