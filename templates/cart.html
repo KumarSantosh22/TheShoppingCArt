@@ -12,7 +12,7 @@
 
     <div class="c-head">
         <h2>Cart Items</h2>
-        <p>Total Quantity: {{total_qty}} &emsp; Total Price: &#8377;{{invoice}}</p>
+        <p>Total Quantity: <b id="tqty">{{total_qty}}</b> &emsp; Total Price: &#8377; <b id="invoice01">{{invoice}}</b></p>
     </div>
 
     <div class="cart">
@@ -47,7 +47,7 @@
         </table>
 
         <div id="btn09">
-            <a href="{% url 'checkout' %}">Checkout</a>
+            <a id="btn-1234" onclick="checkEmpty()"  href="{% url 'checkout' %}">Checkout</a>
         </div>
 
     </div>
@@ -56,4 +56,19 @@
 
 {% block js %}
     <script src="{% static 'script/cart.js' %}"></script>
+
+    <script>
+        var attr = document.getElementsByTagName("main");
+        attr[0].style.height = "67vh";
+        
+        function checkEmpty(){
+            var totalqty = document.getElementById('tqty');
+            if (totalqty.innerText == "0") {
+                 alert("You have zero items in your cart");
+                 var ahref = document.getElementById('btn-1234');
+                 ahref.href = "";
+                 }
+        }
+    </script>
+
 {% endblock %}

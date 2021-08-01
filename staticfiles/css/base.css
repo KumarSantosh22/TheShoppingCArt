@@ -10,6 +10,7 @@
   --bgcolor: rgb(9, 4, 88);
 }
 
+
 /* *****************************NAVBAR SECTION*************************************** */
 
 nav {
@@ -204,7 +205,7 @@ main {
 }
 
 .item {
-  margin: 1rem 2rem;
+  margin: 1rem .2rem;
   padding: 1rem 1rem;
   border: 2px solid blue;
   border-radius: 0.5rem;
@@ -275,6 +276,12 @@ footer h2 {
 
 /* ********************************RESPONSIVE DESIGN******************************  */
 /* Media Query */
+@media only screen and (min-width: 100px) and (max-width:1155px){
+  html {
+    width: fit-content;
+  }
+}
+
 @media only screen and (min-width: 1156px) {
   .nav-right {
     position: absolute;
@@ -283,6 +290,5 @@ footer h2 {
     right: 0px;
   }
 }
-
 
 /*  */

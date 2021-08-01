@@ -44,5 +44,10 @@
 {% endblock %}
 
 {% block js %}
-<!-- Add your inline javascript here  -->
-{% endblock%}
+<script>
+    var attr = document.getElementsByTagName("main");
+    attr[0].style.height = "67vh";
+    var agree = document.getElementsByTagName('label');
+    agree[6].innerText = "Agree All T&C";
+</script>
+{% endblock %}
