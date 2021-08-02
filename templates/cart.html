@@ -58,8 +58,15 @@
     <script src="{% static 'script/cart.js' %}"></script>
 
     <script>
-        var attr = document.getElementsByTagName("main");
-        attr[0].style.height = "67vh";
+        var totalqty = document.getElementById('tqty');
+            if (totalqty.innerText == "0") {
+                var attr = document.getElementsByTagName("main");
+                attr[0].style.height = "67vh";
+            }
+            else {
+                var attr = document.getElementsByTagName("main");
+                attr[0].style.height = "100vh";
+            }
         
         function checkEmpty(){
             var totalqty = document.getElementById('tqty');
